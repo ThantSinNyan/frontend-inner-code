@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
 import { actions } from './actions'
+import type { PersonalOverViewDTO } from '@/models/PersonalOverViewDTO'
 
 export const usePersonalInfoStore = defineStore('personalInfo', {
   state: () => ({
-    data: {} as Record<string, unknown>
+    data: {} as PersonalOverViewDTO
   }),
-  actions
+  actions,
+  persist: true 
 })
-
 export type PersonalInfoStore = ReturnType<typeof usePersonalInfoStore>

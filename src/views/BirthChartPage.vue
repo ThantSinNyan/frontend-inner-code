@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { usePersonalInfoStore } from '@/stores/personalInfo'
+
+const personOverView = usePersonalInfoStore().data
+console.log(personOverView.mainTitle)
+</script>
 <template>
   <div class="hs_indx_title_main_wrapper">
     <div class="hs_title_img_overlay" />
@@ -1000,7 +1006,7 @@
                       <li><a
                         href="#"
                         class="hs_tabs_btn"
-                      >Chiron in Scorpio in the 4th House</a></li>
+                      >{{ personOverView.mainTitle }}</a></li>
                       <li>31 March - 12 October</li>
                     </ul>
                   </div>
@@ -1020,9 +1026,7 @@
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                       <div class="hs_ar_first_sec_img_cont_wrapper">
-                        <p>The Ox occupies the second position in the Chinese Zodiac. The zodiac mls are, in order: Rat, Ox, Tiger, Rabbit, Dragon, Snake, Horse, Goat, Monkey, oser, Dog, and Pig. Each year is related to a Chinese
-                          zodiac animal according to the 12-year-cycle.<br><br>Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat sum, nec sagittis sem nibh id elit. Duis sed odio sit. The Ox occupies the cond
-                          position in the Chinese Zodiac. The 12 zodiac animals are, in order: Rat, Tiger, Rabbit, Dragon, Snake, Horse, Goat, Monkey, Rooster, Dog, and Pig. Each year is related to a Chinesezodiac animal.</p>
+                        <p>{{personOverView.description}}</p>
                       </div>
                     </div>
                    
@@ -1034,7 +1038,12 @@
                               <i class="fa fa-circle" />
                             </div>
                             <div class="hs_pr_icon_cont_wrapper hs_ar_icon_cont_wrapper">
-                              <p><span>Core Wounds & Emotional Themes</span> : Emotional Wound, Childhood Trauma, Abandonment, Betrayal, Family Pain</p>
+                              <p>
+                                <span>Core Wounds & Emotional Themes : </span> 
+                                  <template v-for="(item, index) in personOverView.coreWoundsAndEmotionalThemes" :key="index">
+                                    {{ item }}<span v-if="index < personOverView.coreWoundsAndEmotionalThemes.length - 1">, </span>
+                                  </template>
+                              </p>
                             </div>
                           </li>
                           <li>
@@ -1042,7 +1051,11 @@
                               <i class="fa fa-circle" />
                             </div>
                             <div class="hs_pr_icon_cont_wrapper hs_ar_icon_cont_wrapper">
-                              <p><span>Patterns & Struggles</span> : Trust Issues, Emotional Control, Disconnection from Family, Fear of Vulnerability</p>
+                              <p><span>Patterns & Struggles : </span> 
+                                 <template v-for="(item, index) in personOverView.patternsAndStruggles" :key="index">
+                                    {{ item }}<span v-if="index < personOverView.patternsAndStruggles.length - 1">, </span>
+                                 </template>
+                              </p>
                             </div>
                           </li>
                           <li>
@@ -1050,7 +1063,11 @@
                               <i class="fa fa-circle" />
                             </div>
                             <div class="hs_pr_icon_cont_wrapper hs_ar_icon_cont_wrapper">
-                              <p><span>Healing & Transformation</span> : Emotional Resilience, Inner Foundation, Emotional Security, Home & Roots Healing</p>
+                              <p><span>Healing & Transformation : </span> 
+                                 <template v-for="(item, index) in personOverView.healingAndTransformation" :key="index">
+                                    {{ item }}<span v-if="index < personOverView.healingAndTransformation.length - 1">, </span>
+                                 </template>
+                              </p>
                             </div>
                           </li>
                           <li>
@@ -1058,7 +1075,11 @@
                               <i class="fa fa-circle" />
                             </div>
                             <div class="hs_pr_icon_cont_wrapper hs_ar_icon_cont_wrapper">
-                              <p><span>Spiritual Wisdom & Gifts </span>: Emotional Depth, Healing Others, Empathy, Spiritual Insight, Supportive Presence</p>
+                              <p><span>Spiritual Wisdom & Gifts : </span> 
+                                <template v-for="(item, index) in personOverView.spiritualWisdomAndGifts" :key="index">
+                                    {{ item }}<span v-if="index < personOverView.spiritualWisdomAndGifts.length - 1">, </span>
+                                 </template>
+                              </p>
                             </div>
                           </li>
                         </ul>
@@ -1068,36 +1089,12 @@
                       <div class="hs_pr_second_cont_wrapper">
                         <h2>01.Wound Points</h2>
                         <ul>
-                          <li>
+                           <li v-for="(point, index) in personOverView.woundPoints" :key="index">
                             <div class="hs_pr_icon_wrapper">
                               <i class="fa fa-circle" />
                             </div>
                             <div class="hs_pr_icon_cont_wrapper">
-                              Deep emotional pain linked to family, home, and early childhood.
-                            </div>
-                          </li>
-                          <li>
-                            <div class="hs_pr_icon_wrapper">
-                              <i class="fa fa-circle" />
-                            </div>
-                            <div class="hs_pr_icon_cont_wrapper">
-                              Fear of emotional abandonment or betrayal by those closest to you.
-                            </div>
-                          </li>
-                          <li>
-                            <div class="hs_pr_icon_wrapper">
-                              <i class="fa fa-circle" />
-                            </div>
-                            <div class="hs_pr_icon_cont_wrapper">
-                              Difficulty feeling safe, supported, or emotionally secure.
-                            </div>
-                          </li>
-                          <li>
-                            <div class="hs_pr_icon_wrapper">
-                              <i class="fa fa-circle" />
-                            </div>
-                            <div class="hs_pr_icon_cont_wrapper">
-                              Tendency to hide emotions or resist vulnerability at home.
+                              {{ point }}
                             </div>
                           </li>
                         </ul>              
@@ -1105,83 +1102,30 @@
                       <div class="hs_pr_second_cont_wrapper">
                         <h2>03. Patterns Connected to This Wound.</h2>
                         <ul>
-                          <li>
+                         <li v-for="(point, index) in personOverView.patternsConnectedToThisWound" :key="index">
                             <div class="hs_pr_icon_wrapper">
                               <i class="fa fa-circle" />
                             </div>
                             <div class="hs_pr_icon_cont_wrapper">
-                              Struggles to trust others emotionally, especially within close relationships.
-                            </div>
-                          </li>
-                          <li>
-                            <div class="hs_pr_icon_wrapper">
-                              <i class="fa fa-circle" />
-                            </div>
-                            <div class="hs_pr_icon_cont_wrapper">
-                              A pattern of emotional withdrawal or intense emotional control.
-                            </div>
-                          </li>
-                          <li>
-                            <div class="hs_pr_icon_wrapper">
-                              <i class="fa fa-circle" />
-                            </div>
-                            <div class="hs_pr_icon_cont_wrapper">
-                              Feeling like an outsider in your own family or uncomfortable in your roots.
-                            </div>
-                          </li>
-                          <li>
-                            <div class="hs_pr_icon_wrapper">
-                              <i class="fa fa-circle" />
-                            </div>
-                            <div class="hs_pr_icon_cont_wrapper">
-                              Attracting intense, emotional family dynamics or power struggles.
+                              {{ point }}
                             </div>
                           </li>
                         </ul>
-                        
                       </div>
                       <div class="hs_pr_second_cont_wrapper">
                         <h2>04. Healing Benefits.</h2>
                         <ul>
-                          <li>
+                         <li v-for="(point, index) in personOverView.healingBenefits" :key="index">
                             <div class="hs_pr_icon_wrapper">
                               <i class="fa fa-circle" />
                             </div>
                             <div class="hs_pr_icon_cont_wrapper">
-                              You’ll develop a strong inner emotional foundation and resilience.
-                            </div>
-                          </li>
-                          <li>
-                            <div class="hs_pr_icon_wrapper">
-                              <i class="fa fa-circle" />
-                            </div>
-                            <div class="hs_pr_icon_cont_wrapper">
-                              Learn to create emotional safety within yourself and with others.
-                            </div>
-                          </li>
-                          <li>
-                            <div class="hs_pr_icon_wrapper">
-                              <i class="fa fa-circle" />
-                            </div>
-                            <div class="hs_pr_icon_cont_wrapper">
-                              Build healthier, deeper family or home-based relationships.
-                            </div>
-                          </li>
-                          <li>
-                            <div class="hs_pr_icon_wrapper">
-                              <i class="fa fa-circle" />
-                            </div>
-                            <div class="hs_pr_icon_cont_wrapper">
-                              Finally feel at peace with your past, no longer held back by childhood pain.
+                              {{ point }}
                             </div>
                           </li>
                         </ul>
-                        
                       </div>
-                    </div>
-                    
-                  
-               
+                    </div>              
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <div class="hs_kd_six_sec_btn">
                         <ul>  

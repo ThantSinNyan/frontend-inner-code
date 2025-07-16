@@ -1,3 +1,23 @@
+<script setup lang="ts">
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { usePersonalInfoStore } from '@/stores/personalInfo'
+import type { PersonalFormDTO } from '@/models/PersonalFormDTO'
+
+const formState = reactive<PersonalFormDTO>({
+  birthDate: '',
+  time: '',
+  birthPlace: '',
+  language: '',
+})
+const router = useRouter()
+const personalInfoStore = usePersonalInfoStore()
+const fetchDataAndNavigate = async () => {
+  await personalInfoStore.loadPersonalInfo(formState)
+  router.push('/birthChart')
+}
+
+</script>
 <template>
   <div class="slider-area">
     <div
@@ -150,7 +170,7 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="hs_slider_bottom_box">
-              <form @submit.prevent="handleSubmit">
+              <form>
                 <div class="form-group">
                   <input
                     type="text"
@@ -172,7 +192,8 @@
                 <div class="form-group">
                   <select
                     class="phone_select"
-                    name="phone"
+                    name="birthPlace"
+                    v-model="formState.birthPlace"
                   >
                     <option value="india">Your Birth Place</option>
                     <option value="india">Yangon, Ahlone  </option>
@@ -186,17 +207,19 @@
                 </div>
                 <div class="form-group">
                   <input
-                    type="text"
+                    type="date"
                     class="form-control"
-                    name="phone_no"
+                    name="birthDate"
+                    v-model="formState.birthDate"
                     placeholder="Date Of Birth (dd/mm/yyyy)"
                   >
                 </div>
                 <div class="form-group">
                   <input
-                    type="email"
+                    type="time"
                     class="form-control"
-                    name="email"
+                    name="time"
+                    v-model="formState.time"
                     placeholder="Birth Time (mm:ss)"
                   >
                 </div>
@@ -209,9 +232,12 @@
                 <div class="hs_effect_btn">
                   <ul>
                     <li data-animation="animated flipInX"> <router-link
-                      class="hs_btn_hover"
-                      to="/birthChart"
-                    >See Birth Chart</router-link></li>
+            class="hs_btn_hover"
+            to="#"
+            @click.prevent="fetchDataAndNavigate"
+          >
+            See Birth Chart
+          </router-link></li>
                   </ul>
                 </div>
               </form>

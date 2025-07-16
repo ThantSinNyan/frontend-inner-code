@@ -9,7 +9,7 @@
     <Footer />
   </body>
 </template>
-<script setup>
+<script setup lang="ts">
 import HeadImport from '@/components/Layout/HeadImport.vue'
 import NavLayoutContact from '@/components/Layout/NavLayoutContact.vue'
 import NavLayoutMenu from '@/components/Layout/NavLayoutMenu.vue'

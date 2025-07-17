@@ -48,7 +48,7 @@ onMounted(() => {
               <div class="hs_navi_searchbar_wrapper hidden-sm hidden-xs">
                 <input
                   type="text"
-                  placeholder="Search here"
+                  :placeholder="t('navBar.search')"
                 >
                 <button><i class="fa fa-search" /></button>
               </div>
@@ -60,19 +60,19 @@ onMounted(() => {
                       src="/images/header/top_user.png"
                       alt="user"
                     >
-                    <span class="hidden-xs">Login / Register</span>
+                    <span class="hidden-xs">{{ t('navBar.loginRegister') }}</span>
                   </a>
                   <ul class="dropdown-menu">
                     <li class="signin_dropdown">
-                      <a
+                      <!-- <a
                         href="#"
                         class="btn btn-primary"
-                      > <span>Login with Facebook</span> <i class="fa fa-facebook" /> </a>
-                      <a
+                      > <span>Login with Facebook</span> <i class="fa fa-facebook" /> </a> -->
+                      <!-- <a
                         href="#"
                         class="btn btn-primary google-plus"
-                      > Login  with Google <i class="fa fa-google-plus" /> </a>
-                      <h2>or</h2>
+                      > Login  with Google <i class="fa fa-google-plus" /> </a> -->
+                      <!-- <h2>or</h2> -->
                       <div class="formsix-pos">
                         <div class="form-group i-email">
                           <input

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive,onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePersonalInfoStore } from '@/stores/personalInfo'
 import type { PersonalFormDTO } from '@/models/PersonalFormDTO'
@@ -28,10 +28,15 @@ const fetchDataAndNavigate = async () => {
     loadingStore.stop()
   }
 }
+onMounted(() => {
+  const saved = localStorage.getItem('language')
+  if (saved) {
+      formState.language=saved === 'en' ? 'English' : 'Myanmar'
+      console.log("formState.language--> ",formState.language)
+  }
+})
 </script>
 <template>
-   <p>{{ t('message.hello') }}</p>
-    <p>{{ t('message.welcome') }}</p>
   <div class="slider-area">
     <div
       id="carousel-example-generic"
@@ -56,7 +61,7 @@ const fetchDataAndNavigate = async () => {
                         <li data-animation="animated flipInX"><a
                           href="#"
                           class="hs_btn_hover"
-                        >Read more</a></li>
+                        >{{ t('birthData.btnReadMore') }}</a></li>
                       </ul>
                     </div>
                     <div class="clear" />
@@ -196,8 +201,8 @@ const fetchDataAndNavigate = async () => {
                     class="gender_select"
                     name="gender"
                   >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="male">{{ t('birthData.birthDataForm.male') }}</option>
+                    <option value="female">{{ t('birthData.birthDataForm.female') }}</option>
                   </select>
                 </div>
               
@@ -248,7 +253,7 @@ const fetchDataAndNavigate = async () => {
             to="#"
             @click.prevent="fetchDataAndNavigate"
           >
-            See Birth Chart
+           {{ t('birthData.birthDataForm.btnBarChart') }}
           </router-link></li>
                   </ul>
                 </div>

@@ -1,7 +1,10 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
+</script>
 <template>
   <div class="hs_header_Wrapper hidden-sm hidden-xs">
-    <!-- hs top header Start -->
     <div class="hs_top_header_main_Wrapper">
       <div class="hs_header_logo_left">
         <div class="hs_logo_wrapper">
@@ -20,20 +23,20 @@
               <router-link
                 class="menu-button"
                 to="/"
-              >Home</router-link>
+              >{{ t('menuBar.home') }}</router-link>
             </li>
             <li>
               <router-link
                 class="menu-button"
                 to="/about"
-              >About Us</router-link>
+              >{{ t('menuBar.aboutUs') }}</router-link>
             </li>
               
             <li class="dropdown menu-button">
               <a
                 class="menu-button"
                 href="#"
-              >Services</a>
+              >{{ t('menuBar.services') }}</a>
               <ul class="dropdown-menu hs_mega_menu">
                 <li>
                   <a
@@ -43,21 +46,7 @@
                 </li>
               </ul>
             </li>
-            <li><router-link to="/contact">Contact</router-link></li>
-            <li class="dropdown menu-button">
-              <a
-                class="menu-button"
-                href="#"
-              >English</a>
-              <ul class="dropdown-menu hs_mega_menu">
-                <li>
-                  <a
-                    class="menu-button"
-                    href="aries.html"
-                  >Myanamr</a>
-                </li>
-              </ul>
-            </li>
+            <li><router-link to="/contact">{{ t('menuBar.content') }}</router-link></li>
           </ul>
         </nav>
         <div class="hs_btn_wrapper hidden-md">
@@ -66,7 +55,7 @@
               <router-link
                 class="hs_btn_hover"
                 to="/birthDataPage"
-              >Start Journey</router-link>
+              >{{ t('menuBar.btnStartJourney') }}</router-link>
             </li>
           </ul>
         </div>

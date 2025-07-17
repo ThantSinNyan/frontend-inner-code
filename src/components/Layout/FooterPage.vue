@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+</script>
 <template>
   <!-- hs footer wrapper Start -->
   <div class="hs_footer_main_wrapper v-2_footer">
@@ -8,13 +12,13 @@
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="hs_footer_logo_wrapper">
               <img
-                src="/images/content/footer_logo.png"
+                src="/images/content/footer_logo_1.png"
                 alt="footer_logo"
                 class="img-responsive"
               >
               <h3>+1800-123-123</h3>
-              <p>We are a spiritual healing platform that blends astrology, mindfulness, and AI to guide individuals on a personalized journey of self-discovery and emotional growth.</p>
-              <h4><a href="#">Read More <i class="fa fa-long-arrow-right" /></a></h4>
+              <p>{{ t('footer.description') }}</p>
+              <h4><a href="#">{{ t('birthData.btnReadMore') }} <i class="fa fa-long-arrow-right" /></a></h4>
               <ul>
                 <li><a href="#"><i class="fa fa-facebook" /></a></li>
                 <li><a href="#"><i class="fa fa-twitter" /></a></li>
@@ -25,40 +29,40 @@
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="hs_footer_list_wrapper">
-              <h2>Quick Links </h2>
+              <h2>{{ t('footer.quickLinks') }} </h2>
               <ul class="hs_footer_list">
                 <li><a href="#"><i
                   class="fa fa-caret-right"
                   aria-hidden="true"
-                /> Home</a>
+                /> {{ t('footer.home') }}</a>
                 </li>
                 <li><a href="#"><i
                   class="fa fa-caret-right"
                   aria-hidden="true"
-                /> About </a>
+                /> {{ t('footer.about') }} </a>
                 </li>
                 <li><a href="#"><i
                   class="fa fa-caret-right"
                   aria-hidden="true"
-                /> How It Works </a>
+                /> {{ t('footer.howItWorks') }} </a>
                 </li>
                 <li><a href="#"><i
                   class="fa fa-caret-right"
                   aria-hidden="true"
-                /> Explore Signs</a>
+                /> {{ t('footer.exploreSigns') }}</a>
                 </li>
                 <li><a href="#"><i
                   class="fa fa-caret-right"
                   aria-hidden="true"
-                />Start Your Journey</a> </li>
+                />{{ t('footer.startYourJourney') }}</a> </li>
                 <li><a href="#"><i
                   class="fa fa-caret-right"
                   aria-hidden="true"
-                />About Us </a> </li>
+                />{{ t('footer.aboutUs') }} </a> </li>
                 <li><a href="#"><i
                   class="fa fa-caret-right"
                   aria-hidden="true"
-                />Contact Us </a> </li>
+                />{{ t('footer.contactUs') }}</a> </li>
               </ul>
             </div>
           </div>

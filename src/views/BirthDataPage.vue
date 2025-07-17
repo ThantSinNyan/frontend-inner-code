@@ -3,6 +3,11 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePersonalInfoStore } from '@/stores/personalInfo'
 import type { PersonalFormDTO } from '@/models/PersonalFormDTO'
+import { useLoadingStore } from '@/stores/personalInfo/root'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+const loadingStore = useLoadingStore()
 
 const formState = reactive<PersonalFormDTO>({
   birthDate: '',
@@ -13,12 +18,20 @@ const formState = reactive<PersonalFormDTO>({
 const router = useRouter()
 const personalInfoStore = usePersonalInfoStore()
 const fetchDataAndNavigate = async () => {
-  await personalInfoStore.loadPersonalInfo(formState)
-  router.push('/birthChart')
+  loadingStore.start()
+  try {
+    await personalInfoStore.loadPersonalInfo(formState)
+    router.push('/birthChart')
+  } catch (err) {
+    console.error(err)
+  } finally {
+    loadingStore.stop()
+  }
 }
-
 </script>
 <template>
+   <p>{{ t('message.hello') }}</p>
+    <p>{{ t('message.welcome') }}</p>
   <div class="slider-area">
     <div
       id="carousel-example-generic"
@@ -35,10 +48,9 @@ const fetchDataAndNavigate = async () => {
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="content">
-                    <h1 data-animation="animated bounceInLeft"> Discover Your Healing Path</h1>
-                    <h2 data-animation="animated zoomInDown">the <span>Inner</span> Code</h2>
-                    <p data-animation="animated bounceInUp">Enter your birth date, time, and place to uncover your Chiron wound and House placement—the key to understanding your emotional pain and life challenges.
-                      This is the first step in creating your personalized healing journey based on your unique astrological blueprint.</p>
+                    <h1 data-animation="animated bounceInLeft"> {{ t('birthData.title') }}</h1>
+                    <h2 data-animation="animated zoomInDown">{{ t('birthData.subTitle') }}</h2>
+                    <p data-animation="animated bounceInUp">{{ t('birthData.description') }}</p>
                     <div class="hs_effect_btn">
                       <ul>
                         <li data-animation="animated flipInX"><a
@@ -66,7 +78,7 @@ const fetchDataAndNavigate = async () => {
                               <li><a
                                 href="#"
                                 class="hs_tabs_btn"
-                              >Family</a></li>
+                              >{{ t('birthData.healingCategory.family') }}</a></li>
                             </ul>
                           </div>
                         </div>
@@ -84,7 +96,7 @@ const fetchDataAndNavigate = async () => {
                               <li><a
                                 href="#"
                                 class="hs_tabs_btn"
-                              >Personality</a></li>
+                              >{{ t('birthData.healingCategory.presonality') }}</a></li>
                             </ul>
                           </div>
                         </div>
@@ -105,7 +117,7 @@ const fetchDataAndNavigate = async () => {
                                     <li><a
                                       href="#"
                                       class="hs_tabs_btn"
-                                    >Relationship</a></li>
+                                    >{{ t('birthData.healingCategory.relationship') }}</a></li>
                                   </ul>
                                 </div>
                               </div>
@@ -123,7 +135,7 @@ const fetchDataAndNavigate = async () => {
                                     <li><a
                                       href="#"
                                       class="hs_tabs_btn"
-                                    >Career</a></li>
+                                    >{{ t('birthData.healingCategory.career') }}</a></li>
                                   </ul>
                                 </div>
                               </div>
@@ -176,7 +188,7 @@ const fetchDataAndNavigate = async () => {
                     type="text"
                     class="form-control"
                     name="nameOne"
-                    placeholder="My Name is"
+                    :placeholder="t('birthData.birthDataForm.name')"
                   >
                 </div>
                 <div class="form-group">
@@ -224,7 +236,7 @@ const fetchDataAndNavigate = async () => {
                   >
                 </div>
                 <div class="remember_box">
-                  <label class="control control--checkbox"> Terms-and-conditions
+                  <label class="control control--checkbox">{{ t('birthData.birthDataForm.teamAndConduction') }}
                     <input type="checkbox">
                     <span class="control__indicator" />
                   </label>

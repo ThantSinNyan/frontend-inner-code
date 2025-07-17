@@ -1,0 +1,20 @@
+{
+  "birthData": {
+    "title": "Discover Your Healing Path!",
+    "subTitle": "the Inner Code",
+    "description": "Enter your birth date, time, and place to uncover your Chiron wound and House placement—the key to understanding your emotional pain and life challenges. This is the first step in creating your personalized healing journey based on your unique astrological blueprint.",
+    "btnReadMore": "Read More",
+    "healingCategory": {
+       "family": "Family",
+       "presonality": "Personality",
+       "relationship": "Relationship",
+       "career": "Career"
+    },
+    "birthDataForm": {
+      "name": "My Name Is",
+      "birthDate": "Date Of Birth",
+      "birthPlace": "Birth Place",
+      "teamAndConduction": "Teams And Conditions"
+    }
+  }
+}

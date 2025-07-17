@@ -1,4 +1,43 @@
+<script setup lang="ts">
+import { useLoadingStore } from '@/stores/personalInfo/root';
+import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { locale } = useI18n()
+const currentLang = ref(locale.value)
+const { t } = useI18n()
+
+const loadingStore = useLoadingStore()
+const isDropdownOpen = ref(false)
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value
+}
+
+const changeLanguage = (lang: string) => {
+  currentLang.value=lang
+  isDropdownOpen.value = false
+  locale.value = lang
+  localStorage.setItem('language', lang)
+}
+
+const currentLabel = computed(() => {
+   return currentLang.value === 'en' ? 'English' : 'မြန်မာ'
+})
+
+onMounted(() => {
+  const saved = localStorage.getItem('language')
+  if (saved) {
+    currentLang.value = saved
+    locale.value = saved
+  }
+})
+</script>
 <template>
+  <div id="preloader" v-if="loadingStore.isLoading">
+    <div id="status">
+      <img src="/images/header/horoscope.gif" id="preloader_image" alt="loader">
+    </div>
+  </div>
   <div class="main_header_wrapper">
     <div class="hs_navigation_header_wrapper">
       <div class="">
@@ -82,6 +121,21 @@
                     </li>
                   </ul>
                 </li>
+              </ul>
+              <ul class="cart_login_wrapper"> 
+                <li class="dropdown menu-button hs_top_user_profile" @click="toggleDropdown">
+                  <a href="javascript:void(0)">
+                    <span class="hidden-xs">{{ currentLabel }}</span>
+                  </a>
+                  <ul class="dropdown-menu" v-show="isDropdownOpen">
+                    <li class="signin_dropdown" @click.stop="changeLanguage('en')">
+                      <a href="#"><span>English</span></a>
+                    </li>
+                    <li class="signin_dropdown" @click.stop="changeLanguage('my')">
+                      <a href="#"><span>မြန်မာ</span></a>
+                    </li>
+                  </ul>
+                </li>            
               </ul>
             </div>
           </div>

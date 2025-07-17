@@ -1,3 +1,4 @@
+
 <template>
   <div class="hs_header_Wrapper hidden-sm hidden-xs">
     <!-- hs top header Start -->
@@ -43,6 +44,20 @@
               </ul>
             </li>
             <li><router-link to="/contact">Contact</router-link></li>
+            <li class="dropdown menu-button">
+              <a
+                class="menu-button"
+                href="#"
+              >English</a>
+              <ul class="dropdown-menu hs_mega_menu">
+                <li>
+                  <a
+                    class="menu-button"
+                    href="aries.html"
+                  >Myanamr</a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </nav>
         <div class="hs_btn_wrapper hidden-md">

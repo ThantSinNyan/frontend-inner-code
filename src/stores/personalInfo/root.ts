@@ -17,3 +17,16 @@ export const useRootStore = defineStore('root', {
     }
   }
 })
+export const useLoadingStore = defineStore('loading', {
+  state: () => ({
+    isLoading: false,
+  }),
+  actions: {
+    start() {
+      this.isLoading = true
+    },
+    stop() {
+      this.isLoading = false
+    },
+  },
+})

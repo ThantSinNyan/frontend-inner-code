@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { usePersonalInfoStore } from '@/stores/personalInfo'
-
 const personOverView = usePersonalInfoStore().data
-console.log(personOverView.mainTitle)
+
 </script>
 <template>
   <div class="hs_indx_title_main_wrapper">

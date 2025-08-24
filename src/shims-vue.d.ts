@@ -3,3 +3,7 @@ declare module "*.vue" {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
+declare module './router' {
+  const router: any;
+  export default router;
+}

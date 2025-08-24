@@ -89,7 +89,6 @@ onMounted(() => {
                             id="emailTen"
                             type="email"
                             class="form-control"
-                            required=""
                             placeholder="Email Address *"
                           >
                         </div>
@@ -100,7 +99,6 @@ onMounted(() => {
                             id="namTen-first"
                             type="password"
                             class="form-control"
-                            required=""
                             placeholder="Password *"
                           >
                         </div>

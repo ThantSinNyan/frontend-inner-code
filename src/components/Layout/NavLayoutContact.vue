@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useLoadingStore } from '@/stores/personalInfo/root';
+import { useLanguageStore } from '@/stores/personalInfo/root';
 import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
-const currentLang = ref(locale.value)
 const { t } = useI18n()
+const languageStore = useLanguageStore()
 
 const loadingStore = useLoadingStore()
 const isDropdownOpen = ref(false)
@@ -19,6 +20,15 @@ const changeLanguage = (lang: string) => {
   locale.value = lang
   localStorage.setItem('language', lang)
 }
+
+const currentLang = computed({
+  get: () => languageStore.language,
+  set: (val: string) => {
+    languageStore.language = val
+    locale.value = val
+    isDropdownOpen.value = false
+  }
+})
 
 const currentLabel = computed(() => {
    return currentLang.value === 'en' ? 'English' : 'မြန်မာ'

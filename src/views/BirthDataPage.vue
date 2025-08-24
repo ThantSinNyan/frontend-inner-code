@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { reactive,onMounted } from 'vue'
+import { reactive,watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePersonalInfoStore } from '@/stores/personalInfo'
 import type { PersonalFormDTO } from '@/models/PersonalFormDTO'
 import { useLoadingStore } from '@/stores/personalInfo/root'
 import { useI18n } from 'vue-i18n'
+import { useLanguageStore } from '@/stores/personalInfo/root'
 
 const { t } = useI18n()
 const loadingStore = useLoadingStore()
-
+const languageStore = useLanguageStore()
 const formState = reactive<PersonalFormDTO>({
   birthDate: '',
   time: '',
@@ -28,13 +29,12 @@ const fetchDataAndNavigate = async () => {
     loadingStore.stop()
   }
 }
-onMounted(() => {
-  const saved = localStorage.getItem('language')
-  if (saved) {
-      formState.language=saved === 'en' ? 'English' : 'Myanmar'
-      console.log("formState.language--> ",formState.language)
-  }
-})
+watch(() => languageStore.language, (newLang) => {
+
+  formState.language = newLang === 'en' ? 'English' : 'Myanmar'
+  console.log("formState.language-->",formState.language)
+}, { immediate: true })
+
 </script>
 <template>
   <div class="slider-area">

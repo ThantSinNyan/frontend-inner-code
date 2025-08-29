@@ -205,22 +205,14 @@ watch(() => languageStore.language, (newLang) => {
                     <option value="female">{{ t('birthData.birthDataForm.female') }}</option>
                   </select>
                 </div>
-              
                 <div class="form-group">
-                  <select
-                    class="phone_select"
-                    name="birthPlace"
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="nameOne"
                     v-model="formState.birthPlace"
+                    :placeholder="t('birthData.birthDataForm.birthPlace')"
                   >
-                    <option value="india">Your Birth Place</option>
-                    <option value="india">Yangon, Ahlone  </option>
-                    <option value="india">Yangon, Bahan  </option>
-                    <option value="india">Yangon, Dawbon  </option>
-                    <option value="india">Dawei, Hlaing  </option>
-                    <option value="india">Myake, Hlaingthaya  </option>
-                    <option value="india">Kamayut, Ahlone  </option>
-                    <option value="india">Kyimyindaing, Ahlone  </option>
-                  </select>
                 </div>
                 <div class="form-group">
                   <input

@@ -13,7 +13,7 @@
     "birthDataForm": {
       "name": "My Name Is",
       "birthDate": "Date Of Birth",
-      "birthPlace": "Birth Place",
+      "birthPlace": "Birth Place (Country, City)",
       "teamAndConduction": "Teams And Conditions",
       "male": "Male",
       "female": "Female",

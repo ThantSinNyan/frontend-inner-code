@@ -12,7 +12,7 @@ const loadingStore = useLoadingStore()
 const languageStore = useLanguageStore()
 const formState = reactive<PersonalFormDTO>({
   birthDate: '',
-  time: '',
+  birthTime: '',
   birthPlace: '',
   language: '',
 })
@@ -228,7 +228,7 @@ watch(() => languageStore.language, (newLang) => {
                     type="time"
                     class="form-control"
                     name="time"
-                    v-model="formState.time"
+                    v-model="formState.birthTime"
                     placeholder="Birth Time (mm:ss)"
                   >
                 </div>

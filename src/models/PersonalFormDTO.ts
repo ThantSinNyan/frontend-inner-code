@@ -1,6 +1,6 @@
 export interface PersonalFormDTO {
   birthDate: string    
-  time: string           
+  birthTime: string           
   birthPlace: string  
   language: string     
 }

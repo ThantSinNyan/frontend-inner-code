@@ -3,6 +3,13 @@ import { useLoadingStore } from '@/stores/personalInfo/root';
 import { useLanguageStore } from '@/stores/personalInfo/root';
 import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useAuthStore } from '@/stores/auth/auth'
+import { useRouter } from 'vue-router'
+const email = ref('')
+const password = ref('')
+const authStore = useAuthStore()
+const router = useRouter()
+
 
 const { locale } = useI18n()
 const { t } = useI18n()
@@ -41,6 +48,16 @@ onMounted(() => {
     locale.value = saved
   }
 })
+
+const handleLogin = async () => {
+  const success = await authStore.login(email.value, password.value)
+  if (success) {
+    authStore.startAutoLogout()
+    router.push('/')
+  } else {
+    alert('Invalid email or password')
+  }
+}
 </script>
 <template>
   <div id="preloader" v-if="loadingStore.isLoading">
@@ -70,25 +87,22 @@ onMounted(() => {
                       src="/images/header/top_user.png"
                       alt="user"
                     >
-                    <span class="hidden-xs">{{ t('navBar.loginRegister') }}</span>
+                    <span class="hidden-xs" v-if="authStore.user">
+                      {{ authStore.user.name }}
+                    </span>
+                    <span class="hidden-xs" v-else>
+                      {{ t('navBar.loginRegister') }}
+                    </span>
                   </a>
                   <ul class="dropdown-menu">
                     <li class="signin_dropdown">
-                      <!-- <a
-                        href="#"
-                        class="btn btn-primary"
-                      > <span>Login with Facebook</span> <i class="fa fa-facebook" /> </a> -->
-                      <!-- <a
-                        href="#"
-                        class="btn btn-primary google-plus"
-                      > Login  with Google <i class="fa fa-google-plus" /> </a> -->
-                      <!-- <h2>or</h2> -->
                       <div class="formsix-pos">
                         <div class="form-group i-email">
                           <input
                             id="emailTen"
                             type="email"
                             class="form-control"
+                             v-model="email"
                             placeholder="Email Address *"
                           >
                         </div>
@@ -97,6 +111,7 @@ onMounted(() => {
                         <div class="form-group i-password">
                           <input
                             id="namTen-first"
+                             v-model="password"
                             type="password"
                             class="form-control"
                             placeholder="Password *"
@@ -120,6 +135,7 @@ onMounted(() => {
                           <li data-animation="animated flipInX"><a
                             href="#"
                             class="hs_btn_hover"
+                            @click.prevent="handleLogin"
                           >Login</a></li>
                         </ul>
                       </div>

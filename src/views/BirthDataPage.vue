@@ -30,9 +30,7 @@ const fetchDataAndNavigate = async () => {
   }
 }
 watch(() => languageStore.language, (newLang) => {
-
   formState.language = newLang === 'en' ? 'English' : 'Myanmar'
-  console.log("formState.language-->",formState.language)
 }, { immediate: true })
 
 </script>

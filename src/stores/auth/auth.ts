@@ -32,6 +32,21 @@ export const useAuthStore = defineStore('auth', () => {
       return false
     }
   }
+    const register = async (payload: {
+      name: string
+      email: string
+      password: string
+      confirmPassword: string
+    }) => {
+      try {
+        const { data } = await AxiosWithAuth.post('auth/register', payload)
+        return data // you can return a success message or user object from backend
+      } catch (err) {
+        const error = err as AxiosError<string>
+        console.error('Registration failed:', error?.response?.data || err)
+        throw error
+      }
+    }
 
   const logout = () => {
     token.value = null
@@ -55,6 +70,7 @@ export const useAuthStore = defineStore('auth', () => {
     isAuthenticated,
     login,
     logout,
-    startAutoLogout
+    startAutoLogout,
+    register
   }
 })

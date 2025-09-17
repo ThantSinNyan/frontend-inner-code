@@ -26,6 +26,31 @@
 /*--------------
 1.Theme default CSS
 --------------------------*/
+.privacy-note {
+  margin-left: 1.5rem; /* aligns with text after checkbox */
+  font-size: 0.8rem;
+  color: #666;
+  font-style: italic;
+}
+
+.is-invalid {
+  border: 1px solid red !important;
+}
+.error-text {
+  color: red;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+.btn-purple {
+  background-color: #7B3FA0; /* purple */
+  color: white;             /* text white */
+  border: none;
+  border-radius: 25px;      /* rounded like pill */
+  padding: 10px 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background 0.3s ease;
+}
 
 body, html {
 	font-family: 'Roboto', sans-serif;

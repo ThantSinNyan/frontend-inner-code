@@ -5,16 +5,11 @@ import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth/auth'
 import { useRouter } from 'vue-router'
-const email = ref('')
-const password = ref('')
 const authStore = useAuthStore()
-const router = useRouter()
-
-
 const { locale } = useI18n()
 const { t } = useI18n()
 const languageStore = useLanguageStore()
-
+const router = useRouter()
 const loadingStore = useLoadingStore()
 const isDropdownOpen = ref(false)
 const toggleDropdown = () => {
@@ -41,6 +36,11 @@ const currentLabel = computed(() => {
    return currentLang.value === 'en' ? 'English' : 'မြန်မာ'
 })
 
+const handleLogout = () => {
+  authStore.logout() 
+  router.push('/login') 
+}
+
 onMounted(() => {
   const saved = localStorage.getItem('language')
   if (saved) {
@@ -48,16 +48,14 @@ onMounted(() => {
     locale.value = saved
   }
 })
-
-const handleLogin = async () => {
-  const success = await authStore.login(email.value, password.value)
-  if (success) {
-    authStore.startAutoLogout()
-    router.push('/')
-  } else {
-    alert('Invalid email or password')
-  }
+const goToLogin = () => {
+  router.push('/login')
 }
+
+const goToRegister = () => {
+  router.push('/register')
+}
+
 </script>
 <template>
   <div id="preloader" v-if="loadingStore.isLoading">
@@ -79,8 +77,21 @@ const handleLogin = async () => {
                 >
                 <button><i class="fa fa-search" /></button>
               </div>
+                <ul class="cart_login_wrapper">
+                <li class="dropdown menu-button hs_top_user_profile">
+                  <a href="#">
+                   <span 
+                      class="hidden-xs" 
+                      v-if="authStore.user"
+                      @click="handleLogout"
+                      style="cursor: pointer;"
+                    >
+                      Logout
+                    </span>
+                  </a>
+                </li>
+              </ul>
               <ul class="cart_login_wrapper">
-               
                 <li class="dropdown menu-button hs_top_user_profile">
                   <a href="#">
                     <img
@@ -90,60 +101,16 @@ const handleLogin = async () => {
                     <span class="hidden-xs" v-if="authStore.user">
                       {{ authStore.user.name }}
                     </span>
-                    <span class="hidden-xs" v-else>
-                      {{ t('navBar.loginRegister') }}
-                    </span>
+                <span class="hidden-xs" v-else>
+                  <a @click.prevent="goToLogin" style="cursor: pointer;">
+                    {{ t('navBar.login') }}
                   </a>
-                  <ul class="dropdown-menu">
-                    <li class="signin_dropdown">
-                      <div class="formsix-pos">
-                        <div class="form-group i-email">
-                          <input
-                            id="emailTen"
-                            type="email"
-                            class="form-control"
-                             v-model="email"
-                            placeholder="Email Address *"
-                          >
-                        </div>
-                      </div>
-                      <div class="formsix-e">
-                        <div class="form-group i-password">
-                          <input
-                            id="namTen-first"
-                             v-model="password"
-                            type="password"
-                            class="form-control"
-                            placeholder="Password *"
-                          >
-                        </div>
-                      </div>
-                      <div class="remember_box">
-                        <label class="control control--checkbox">Remember me
-                          <input type="checkbox">
-                          <span class="control__indicator" />
-                        </label>
-                        <a
-                          href="#"
-                          class="forget_password"
-                        >
-                          Forgot Password
-                        </a>
-                      </div>
-                      <div class="hs_effect_btn">
-                        <ul>
-                          <li data-animation="animated flipInX"><a
-                            href="#"
-                            class="hs_btn_hover"
-                            @click.prevent="handleLogin"
-                          >Login</a></li>
-                        </ul>
-                      </div>
-                      <div class="sign_up_message">
-                        <p>Don’t have an account ? <a href="#"> Sign up </a> </p>
-                      </div>
-                    </li>
-                  </ul>
+                  /
+                  <a @click.prevent="goToRegister" style="cursor: pointer;">
+                    {{ t('navBar.register') }}
+                  </a>
+                </span>
+                  </a>
                 </li>
               </ul>
               <ul class="cart_login_wrapper"> 

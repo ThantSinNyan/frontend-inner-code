@@ -1,4 +1,6 @@
 export interface PersonalFormDTO {
+  userId: string
+  nameOne: String
   birthDate: string    
   birthTime: string           
   birthPlace: string  

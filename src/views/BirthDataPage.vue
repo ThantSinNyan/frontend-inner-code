@@ -1,26 +1,65 @@
 <script setup lang="ts">
-import { reactive,watch } from 'vue'
+import { reactive, watch, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePersonalInfoStore } from '@/stores/personalInfo'
 import type { PersonalFormDTO } from '@/models/PersonalFormDTO'
 import { useLoadingStore } from '@/stores/personalInfo/root'
 import { useI18n } from 'vue-i18n'
 import { useLanguageStore } from '@/stores/personalInfo/root'
-
+import { useAuthStore } from '@/stores/auth/auth'
 const { t } = useI18n()
 const loadingStore = useLoadingStore()
 const languageStore = useLanguageStore()
-const formState = reactive<PersonalFormDTO>({
+const router = useRouter()
+const personalInfoStore = usePersonalInfoStore()
+const authStore = useAuthStore()
+
+const formState = reactive<PersonalFormDTO & {
+  nameOne: string
+  gender: string
+  agree: boolean
+}>({
+  userId: '',
+  nameOne: '',
+  gender: '',
   birthDate: '',
   birthTime: '',
   birthPlace: '',
   language: '',
+  agree: false
 })
-const router = useRouter()
-const personalInfoStore = usePersonalInfoStore()
+
+const userIdFromStore = authStore.user?.id
+
+const errors = reactive({
+  nameOne: false,
+  gender: false,
+  birthDate: false,
+  birthTime: false,
+  birthPlace: false,
+  language: false,
+  agree: false,
+})
+const validateForm = () => {
+  errors.nameOne = !formState.nameOne.trim()
+  errors.gender = !formState.gender
+  errors.birthDate = !formState.birthDate
+  errors.birthTime = !formState.birthTime.trim()
+  errors.birthPlace = !formState.birthPlace.trim()
+  errors.language = !formState.language
+  errors.agree = !formState.agree
+
+  return !Object.values(errors).some(e => e) // true if no errors
+}
+
 const fetchDataAndNavigate = async () => {
+  if (!validateForm()) {
+    return
+  }
+
   loadingStore.start()
   try {
+    formState.userId=userIdFromStore
     await personalInfoStore.loadPersonalInfo(formState)
     router.push('/birthChart')
   } catch (err) {
@@ -29,10 +68,14 @@ const fetchDataAndNavigate = async () => {
     loadingStore.stop()
   }
 }
-watch(() => languageStore.language, (newLang) => {
-  formState.language = newLang === 'en' ? 'English' : 'Myanmar'
-}, { immediate: true })
 
+watch(
+  () => languageStore.language,
+  (newLang) => {
+    formState.language = newLang === 'en' ? 'English' : 'Myanmar'
+  },
+  { immediate: true }
+)
 </script>
 <template>
   <div class="slider-area">
@@ -176,78 +219,124 @@ watch(() => languageStore.language, (newLang) => {
       </div>
     </div>
   </div>
-  <!-- hs Slider End -->
-  <!-- hs sign wrapper Start -->
-  <div class="hs_sign_main_wrapper">
+  <div class="hs_sign_main_wrapper" style="margin-bottom: 3rem;">
     <!-- hs_slider_bottom_wrapper Start -->
     <div class="hs_slider_bottom_wrapper">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="hs_slider_bottom_box">
+             <div class="container">
               <form>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="nameOne"
-                    :placeholder="t('birthData.birthDataForm.name')"
-                  >
+                <div class="row">
+                  <!-- Column 1 -->
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label>{{ t('birthData.birthDataForm.name') }}</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="formState.nameOne"
+                        :class="{ 'is-invalid': errors.nameOne }"
+                        placeholder="Enter your name"
+                      >
+                    </div>
+
+                    <div class="form-group">
+                      <label>{{ t('birthData.birthDataForm.gender') }}</label>
+                      <select class="form-control" v-model="formState.gender"  :class="{ 'is-invalid': errors.gender }">
+                        <option value="">-- Select --</option>
+                        <option value="male">{{ t('birthData.birthDataForm.male') }}</option>
+                        <option value="female">{{ t('birthData.birthDataForm.female') }}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Column 2 -->
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label>{{ t('birthData.birthDataForm.birthDate') }}</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        v-model="formState.birthDate"
+                        :class="{ 'is-invalid': errors.birthDate }"
+                      >
+                    </div>
+
+                    <div class="form-group">
+                      <label>{{ t('birthData.birthDataForm.birthTime') }}</label>
+                      <input
+                        type="time"
+                        class="form-control"
+                        v-model="formState.birthTime"
+                        :class="{ 'is-invalid': errors.birthTime }"
+                      >
+                      
+                    </div>
+                    
+                  </div>
+
+                  <!-- Column 3 -->
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label>{{ t('birthData.birthDataForm.birthPlace') }}</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="formState.birthPlace"
+                        placeholder="Enter your birth place"
+                         :class="{ 'is-invalid': errors.birthPlace }"
+                      >
+                    </div>
+
+                    <div class="form-group">
+                      <label>{{ t('birthData.birthDataForm.language') }}</label>
+                      <select class="form-control" v-model="formState.language"
+                       :class="{ 'is-invalid': errors.language }">
+                        <option value="">-- Select --</option>
+                        <option value="English">English</option>
+                        <option value="Myanmar">မြန်မာ</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <select
-                    class="gender_select"
-                    name="gender"
-                  >
-                    <option value="male">{{ t('birthData.birthDataForm.male') }}</option>
-                    <option value="female">{{ t('birthData.birthDataForm.female') }}</option>
-                  </select>
+
+                <!-- Checkbox (full width row) -->
+                <div class="row mt-3">
+                  <div class="col-lg-12">
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        v-model="formState.agree"
+                        id="agreeCheckbox"
+                        :class="{ 'is-invalid': errors.agree }"
+                      >
+                      <label for="agreeCheckbox" class="form-check-label" style="padding-left: 1rem;" :class="{ 'error-text': errors.agree }" >
+                        {{ t('birthData.birthDataForm.teamAndConduction') }}
+                      </label>
+                       <div class="privacy-note" style="padding-bottom: 1rem;">
+                         {{ t('birthData.birthDataForm.note') }}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="nameOne"
-                    v-model="formState.birthPlace"
-                    :placeholder="t('birthData.birthDataForm.birthPlace')"
-                  >
-                </div>
-                <div class="form-group">
-                  <input
-                    type="date"
-                    class="form-control"
-                    name="birthDate"
-                    v-model="formState.birthDate"
-                    placeholder="Date Of Birth (dd/mm/yyyy)"
-                  >
-                </div>
-                <div class="form-group">
-                  <input
-                    type="time"
-                    class="form-control"
-                    name="time"
-                    v-model="formState.birthTime"
-                    placeholder="Birth Time (mm:ss)"
-                  >
-                </div>
-                <div class="remember_box">
-                  <label class="control control--checkbox">{{ t('birthData.birthDataForm.teamAndConduction') }}
-                    <input type="checkbox">
-                    <span class="control__indicator" />
-                  </label>
-                </div>
-                <div class="hs_effect_btn">
-                  <ul>
-                    <li data-animation="animated flipInX"> <router-link
-            class="hs_btn_hover"
-            to="#"
-            @click.prevent="fetchDataAndNavigate"
-          >
-           {{ t('birthData.birthDataForm.btnBarChart') }}
-          </router-link></li>
-                  </ul>
+
+                <!-- Submit button -->
+                <div class="row mt-3">
+                  <div class="col-lg-12">
+                    <button
+                      type="button"
+                      class="btn-purple"
+                      @click.prevent="fetchDataAndNavigate"
+                    >
+                        {{ t('birthData.birthDataForm.submit') }}
+                    </button>
+                  </div>
                 </div>
               </form>
+             </div>
             </div>
           </div>
         </div>

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth/auth'
 
 const authStore = useAuthStore()
-
+const router = useRouter()
 const form = reactive({
   name: '',
   email: '',
@@ -28,9 +29,7 @@ const onRegister = async () => {
 
     alert('Registration successful!')
     console.log('Registered user:', result)
-
-    // Redirect to login page or auto-login
-    // router.push('/login')
+    router.push('/login')
   } catch (error) {
     alert('Registration failed. Please check your input or try again.')
   }

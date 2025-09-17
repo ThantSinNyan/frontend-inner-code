@@ -20,7 +20,10 @@
       "language": "Language",
       "gender": "Gender",
       "submit": "Submit",
-      "btnBarChart": "SEE BIRTH CHART"
+      "btnBarChart": "SEE BIRTH CHART",
+      "note": "",
+      "birthTime": "BirthTime"
+
     }
   },
   "menuBar":{

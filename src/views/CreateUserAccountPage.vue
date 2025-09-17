@@ -37,19 +37,6 @@ const onRegister = async () => {
 }
 </script>
 
-<style scoped>
-.register-form {
-  max-width: 450px;
-  margin: 0 auto;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-.form-label {
-  font-weight: 600;
-}
-</style>
 <template>
   <div class="hs_indx_title_main_wrapper">
     <div class="hs_title_img_overlay" />
@@ -86,14 +73,14 @@ const onRegister = async () => {
           <div class="register_form_wrapper">
            <h2 class="mb-4 text-center">Create Your Account</h2>
             <br>
-            <form @submit.prevent="onRegister" class="register-form">
+            <form class="register-form" @submit.prevent="onRegister">
               <!-- Name -->
               <div class="form-group mb-3">
                 <label for="name" class="form-label">Full Name</label>
                 <input
-                  type="text"
                   id="name"
                   v-model="form.name"
+                  type="text"
                   class="form-control"
                   placeholder="Enter your full name"
                   required
@@ -104,9 +91,9 @@ const onRegister = async () => {
               <div class="form-group mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input
-                  type="email"
                   id="email"
                   v-model="form.email"
+                  type="email"
                   class="form-control"
                   placeholder="Enter your email"
                   required
@@ -117,9 +104,9 @@ const onRegister = async () => {
               <div class="form-group mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input
-                  type="password"
                   id="password"
                   v-model="form.password"
+                  type="password"
                   class="form-control"
                   placeholder="Enter password"
                   required
@@ -130,9 +117,9 @@ const onRegister = async () => {
               <div class="form-group mb-3">
                 <label for="confirmPassword" class="form-label">Confirm Password</label>
                 <input
-                  type="password"
                   id="confirmPassword"
                   v-model="form.confirmPassword"
+                  type="password"
                   class="form-control"
                   placeholder="Confirm password"
                   required
@@ -142,9 +129,9 @@ const onRegister = async () => {
               <!-- Terms & Conditions -->
               <div class="form-check mb-3">
                 <input
-                  type="checkbox"
                   id="agree"
                   v-model="form.agree"
+                  type="checkbox"
                   class="form-check-input"
                   required
                 >
@@ -200,3 +187,16 @@ const onRegister = async () => {
     </div>
   </div>
 </template>
+<style scoped>
+.register-form {
+  max-width: 450px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+.form-label {
+  font-weight: 600;
+}
+</style>

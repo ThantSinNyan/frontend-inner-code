@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { usePersonalInfoStore } from '@/stores/personalInfo'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const personOverView = usePersonalInfoStore().data
 
 </script>
@@ -10,14 +12,14 @@ const personOverView = usePersonalInfoStore().data
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 full_width">
           <div class="hs_indx_title_left_wrapper">
-            <h2>Journey Overview</h2>
+            <h2>{{ t('journey.journeyOverview') }}</h2>
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  full_width">
           <div class="hs_indx_title_right_wrapper">
             <ul>
-              <li><a href="#">Birth Data</a> &nbsp;&nbsp;&nbsp;> </li>
-              <li>Journey Overview</li>
+              <li><a href="#"> {{ t('journey.birthData') }}</a> &nbsp;&nbsp;&nbsp;> </li>
+              <li> {{ t('journey.journeyOverview') }}</li>
             </ul>
           </div>
         </div>
@@ -29,10 +31,9 @@ const personOverView = usePersonalInfoStore().data
       <div class="hs_sign_heading_wrapper">
         <div class="hs_about_heading_main_wrapper">
           <div class="hs_about_heading_wrapper">
-            <h2> <span>Chiron And House Placement</span></h2>
+            <h2> <span> {{ t('journey.chironAndHousePlacement') }}</span></h2>
             <h4><span /></h4>
-            <p>Discover where your deepest emotional wounds (Chiron) appear in your life through the lens of astrology.<br>
-              Your House placement shows which area of life these wounds affect most—offering insight into your healing journey.</p>
+            <p>{{ t('journey.about') }}</p>
           </div>
         </div>
       </div>
@@ -1011,7 +1012,6 @@ const personOverView = usePersonalInfoStore().data
                   </div>
                 </div>
               </div>
-        
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="hs_ar_first_sec_wrapper">
                   <div class="row">
@@ -1038,7 +1038,7 @@ const personOverView = usePersonalInfoStore().data
                             </div>
                             <div class="hs_pr_icon_cont_wrapper hs_ar_icon_cont_wrapper">
                               <p>
-                                <span>Core Wounds & Emotional Themes : </span> 
+                                <span>{{ t('journey.coreWoundEmotionalThemes') }} : </span> 
                                   <template v-for="(item, index) in personOverView.coreWoundsAndEmotionalThemes" :key="index">
                                     {{ item }}<span v-if="index < personOverView.coreWoundsAndEmotionalThemes.length - 1">, </span>
                                   </template>
@@ -1050,7 +1050,7 @@ const personOverView = usePersonalInfoStore().data
                               <i class="fa fa-circle" />
                             </div>
                             <div class="hs_pr_icon_cont_wrapper hs_ar_icon_cont_wrapper">
-                              <p><span>Patterns & Struggles : </span> 
+                              <p><span>{{ t('journey.patternsStruggles') }} : </span> 
                                  <template v-for="(item, index) in personOverView.patternsAndStruggles" :key="index">
                                     {{ item }}<span v-if="index < personOverView.patternsAndStruggles.length - 1">, </span>
                                  </template>
@@ -1062,7 +1062,7 @@ const personOverView = usePersonalInfoStore().data
                               <i class="fa fa-circle" />
                             </div>
                             <div class="hs_pr_icon_cont_wrapper hs_ar_icon_cont_wrapper">
-                              <p><span>Healing & Transformation : </span> 
+                              <p><span>{{ t('journey.healingTransformation') }}  : </span> 
                                  <template v-for="(item, index) in personOverView.healingAndTransformation" :key="index">
                                     {{ item }}<span v-if="index < personOverView.healingAndTransformation.length - 1">, </span>
                                  </template>
@@ -1074,7 +1074,7 @@ const personOverView = usePersonalInfoStore().data
                               <i class="fa fa-circle" />
                             </div>
                             <div class="hs_pr_icon_cont_wrapper hs_ar_icon_cont_wrapper">
-                              <p><span>Spiritual Wisdom & Gifts : </span> 
+                              <p><span>{{ t('journey.spiritualWisdomGifts') }} : </span> 
                                 <template v-for="(item, index) in personOverView.spiritualWisdomAndGifts" :key="index">
                                     {{ item }}<span v-if="index < personOverView.spiritualWisdomAndGifts.length - 1">, </span>
                                  </template>
@@ -1084,24 +1084,13 @@ const personOverView = usePersonalInfoStore().data
                         </ul>
                       </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                   <div class="row">
+                    <!-- Column 1: Wound Points -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
                       <div class="hs_pr_second_cont_wrapper">
-                        <h2>01.Wound Points</h2>
+                        <h2>{{ t('journey.woundPoints') }}</h2>
                         <ul>
-                           <li v-for="(point, index) in personOverView.woundPoints" :key="index">
-                            <div class="hs_pr_icon_wrapper">
-                              <i class="fa fa-circle" />
-                            </div>
-                            <div class="hs_pr_icon_cont_wrapper">
-                              {{ point }}
-                            </div>
-                          </li>
-                        </ul>              
-                      </div>
-                      <div class="hs_pr_second_cont_wrapper">
-                        <h2>03. Patterns Connected to This Wound.</h2>
-                        <ul>
-                         <li v-for="(point, index) in personOverView.patternsConnectedToThisWound" :key="index">
+                          <li v-for="(point, index) in personOverView.woundPoints" :key="index">
                             <div class="hs_pr_icon_wrapper">
                               <i class="fa fa-circle" />
                             </div>
@@ -1111,10 +1100,14 @@ const personOverView = usePersonalInfoStore().data
                           </li>
                         </ul>
                       </div>
+                    </div>
+
+                    <!-- Column 2: Patterns -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
                       <div class="hs_pr_second_cont_wrapper">
-                        <h2>04. Healing Benefits.</h2>
+                        <h2>{{ t('journey.patterns') }}</h2>
                         <ul>
-                         <li v-for="(point, index) in personOverView.healingBenefits" :key="index">
+                          <li v-for="(point, index) in personOverView.patternsConnectedToThisWound" :key="index">
                             <div class="hs_pr_icon_wrapper">
                               <i class="fa fa-circle" />
                             </div>
@@ -1124,14 +1117,33 @@ const personOverView = usePersonalInfoStore().data
                           </li>
                         </ul>
                       </div>
-                    </div>              
+                    </div>
+
+                    <!-- Column 3: Benefits -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="hs_pr_second_cont_wrapper">
+                        <h2>{{ t('journey.benefits') }}</h2>
+                        <ul>
+                          <li v-for="(point, index) in personOverView.healingBenefits" :key="index">
+                            <div class="hs_pr_icon_wrapper">
+                              <i class="fa fa-circle" />
+                            </div>
+                            <div class="hs_pr_icon_cont_wrapper">
+                              {{ point }}
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+             
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <div class="hs_kd_six_sec_btn">
                         <ul>  
                           <li><router-link
                             class="hs_btn_hover"
                             to="/reflectiveQuestion"
-                          >Refecletive Question</router-link></li>
+                          >{{ t('journey.refecletiveQuestion') }}</router-link></li>
                         </ul>
                       </div>
                     </div>

@@ -58,9 +58,9 @@ const goToRegister = () => {
 
 </script>
 <template>
-  <div id="preloader" v-if="loadingStore.isLoading">
+  <div v-if="loadingStore.isLoading" id="preloader">
     <div id="status">
-      <img src="/images/header/horoscope.gif" id="preloader_image" alt="loader">
+      <img id="preloader_image" src="/images/header/horoscope.gif" alt="loader">
     </div>
   </div>
   <div class="main_header_wrapper">
@@ -81,10 +81,10 @@ const goToRegister = () => {
                 <li class="dropdown menu-button hs_top_user_profile">
                   <a href="#">
                    <span 
-                      class="hidden-xs" 
-                      v-if="authStore.user"
-                      @click="handleLogout"
+                      v-if="authStore.user" 
+                      class="hidden-xs"
                       style="cursor: pointer;"
+                      @click="handleLogout"
                     >
                       Logout
                     </span>
@@ -98,15 +98,15 @@ const goToRegister = () => {
                       src="/images/header/top_user.png"
                       alt="user"
                     >
-                    <span class="hidden-xs" v-if="authStore.user">
+                    <span v-if="authStore.user" class="hidden-xs">
                       {{ authStore.user.name }}
                     </span>
-                <span class="hidden-xs" v-else>
-                  <a @click.prevent="goToLogin" style="cursor: pointer;">
+                <span v-else class="hidden-xs">
+                  <a style="cursor: pointer;" @click.prevent="goToLogin">
                     {{ t('navBar.login') }}
                   </a>
                   /
-                  <a @click.prevent="goToRegister" style="cursor: pointer;">
+                  <a style="cursor: pointer;" @click.prevent="goToRegister">
                     {{ t('navBar.register') }}
                   </a>
                 </span>
@@ -118,7 +118,7 @@ const goToRegister = () => {
                   <a href="javascript:void(0)">
                     <span class="hidden-xs">{{ currentLabel }}</span>
                   </a>
-                  <ul class="dropdown-menu" v-show="isDropdownOpen">
+                  <ul v-show="isDropdownOpen" class="dropdown-menu">
                     <li class="signin_dropdown" @click.stop="changeLanguage('en')">
                       <a href="#"><span>English</span></a>
                     </li>

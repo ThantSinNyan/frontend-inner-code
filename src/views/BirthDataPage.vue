@@ -234,9 +234,9 @@ watch(
                     <div class="form-group">
                       <label>{{ t('birthData.birthDataForm.name') }}</label>
                       <input
+                        v-model="formState.nameOne"
                         type="text"
                         class="form-control"
-                        v-model="formState.nameOne"
                         :class="{ 'is-invalid': errors.nameOne }"
                         placeholder="Enter your name"
                       >
@@ -244,7 +244,7 @@ watch(
 
                     <div class="form-group">
                       <label>{{ t('birthData.birthDataForm.gender') }}</label>
-                      <select class="form-control" v-model="formState.gender"  :class="{ 'is-invalid': errors.gender }">
+                      <select v-model="formState.gender" class="form-control"  :class="{ 'is-invalid': errors.gender }">
                         <option value="">-- Select --</option>
                         <option value="male">{{ t('birthData.birthDataForm.male') }}</option>
                         <option value="female">{{ t('birthData.birthDataForm.female') }}</option>
@@ -257,9 +257,9 @@ watch(
                     <div class="form-group">
                       <label>{{ t('birthData.birthDataForm.birthDate') }}</label>
                       <input
+                        v-model="formState.birthDate"
                         type="date"
                         class="form-control"
-                        v-model="formState.birthDate"
                         :class="{ 'is-invalid': errors.birthDate }"
                       >
                     </div>
@@ -267,9 +267,9 @@ watch(
                     <div class="form-group">
                       <label>{{ t('birthData.birthDataForm.birthTime') }}</label>
                       <input
+                        v-model="formState.birthTime"
                         type="time"
                         class="form-control"
-                        v-model="formState.birthTime"
                         :class="{ 'is-invalid': errors.birthTime }"
                       >
                       
@@ -282,9 +282,9 @@ watch(
                     <div class="form-group">
                       <label>{{ t('birthData.birthDataForm.birthPlace') }}</label>
                       <input
+                        v-model="formState.birthPlace"
                         type="text"
                         class="form-control"
-                        v-model="formState.birthPlace"
                         placeholder="Enter your birth place"
                          :class="{ 'is-invalid': errors.birthPlace }"
                       >
@@ -292,7 +292,7 @@ watch(
 
                     <div class="form-group">
                       <label>{{ t('birthData.birthDataForm.language') }}</label>
-                      <select class="form-control" v-model="formState.language"
+                      <select v-model="formState.language" class="form-control"
                        :class="{ 'is-invalid': errors.language }">
                         <option value="">-- Select --</option>
                         <option value="English">English</option>
@@ -307,10 +307,10 @@ watch(
                   <div class="col-lg-12">
                     <div class="form-check">
                       <input
+                        id="agreeCheckbox"
+                        v-model="formState.agree"
                         type="checkbox"
                         class="form-check-input"
-                        v-model="formState.agree"
-                        id="agreeCheckbox"
                         :class="{ 'is-invalid': errors.agree }"
                       >
                       <label for="agreeCheckbox" class="form-check-label" style="padding-left: 1rem;" :class="{ 'error-text': errors.agree }" >

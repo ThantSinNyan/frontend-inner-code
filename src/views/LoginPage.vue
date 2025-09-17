@@ -26,20 +26,6 @@ const onLogin = async () => {
 }
 </script>
 
-<style scoped>
-.login-form {
-  max-width: 450px;
-  margin: 0 auto;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-.form-label {
-  font-weight: 600;
-}
-</style>
-
 <template>
   <div class="hs_indx_title_main_wrapper">
     <div class="hs_title_img_overlay" />
@@ -77,13 +63,13 @@ const onLogin = async () => {
           <div class="login_form_wrapper">
             <h2 class="mb-4 text-center">Login to Your Account</h2>
             <br>
-            <form @submit.prevent="onLogin" class="login-form">
+            <form class="login-form" @submit.prevent="onLogin">
               <div class="form-group mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input
-                  type="email"
                   id="email"
                   v-model="form.email"
+                  type="email"
                   class="form-control"
                   placeholder="Enter your email"
                   required
@@ -93,9 +79,9 @@ const onLogin = async () => {
               <div class="form-group mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input
-                  type="password"
                   id="password"
                   v-model="form.password"
+                  type="password"
                   class="form-control"
                   placeholder="Enter your password"
                   required
@@ -150,3 +136,17 @@ const onLogin = async () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.login-form {
+  max-width: 450px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+.form-label {
+  font-weight: 600;
+}
+</style>

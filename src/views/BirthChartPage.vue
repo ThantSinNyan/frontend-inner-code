@@ -43,7 +43,7 @@ const zodiacIcons: Record<string, string> = {
 }
 
 const zodiacIcon = computed(() => {
-  const sign = personOverView.sign?.toLowerCase() || ''
+  const sign = personOverView.value.sign?.toLowerCase() || ''
   return zodiacIcons[sign] || '/images/content/default.png'
 })
 

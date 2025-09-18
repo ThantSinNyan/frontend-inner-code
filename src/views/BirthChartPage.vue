@@ -5,7 +5,7 @@ const { t } = useI18n()
 import { onMounted,reactive,computed } from 'vue'
 import type { PersonalFormDTO } from '@/models/PersonalFormDTO'
 const personalInfoStore = usePersonalInfoStore()
-const personOverView = usePersonalInfoStore().data
+const personOverView = computed(() => personalInfoStore.data)
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const journeyId = route.params.id 
@@ -48,7 +48,9 @@ const zodiacIcon = computed(() => {
 })
 
 onMounted(async () => {
-  await personalInfoStore.loadPersonalInfoById(formState)
+  if (journeyId) {
+    await personalInfoStore.loadPersonalInfoById(formState)
+  }
 })
 
 </script>

@@ -60,15 +60,17 @@ const fetchDataAndNavigate = async () => {
     return
   }
 
-  loadingStore.start()
   try {
     formState.userId = userIdFromStore
     await personalInfoStore.loadAndSavePersonalInfo(formState)
-    router.push(`/birthChart/${personalInfoStore.data.id}`)
+    if (personalInfoStore.data?.id) {
+        router.push(`/birthChart/${personalInfoStore.data.id}`)
+      } else {
+        console.error('No ID returned from backend')
+      }
   } catch (err) {
     console.error(err)
   } finally {
-    loadingStore.stop()
   }
 }
 

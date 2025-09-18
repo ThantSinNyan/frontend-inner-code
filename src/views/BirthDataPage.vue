@@ -52,7 +52,7 @@ const validateForm = () => {
   errors.language = !formState.language
   errors.agree = !formState.agree
 
-  return !Object.values(errors).some((e) => e) // true if no errors
+  return !Object.values(errors).some((e) => e) 
 }
 
 const fetchDataAndNavigate = async () => {
@@ -71,7 +71,6 @@ const fetchDataAndNavigate = async () => {
     loadingStore.stop()
   }
 }
-
 
 watch(
   () => languageStore.language,

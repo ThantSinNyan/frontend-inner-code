@@ -2,7 +2,7 @@
 import { usePersonalInfoStore } from '@/stores/personalInfo'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-import { onMounted,reactive } from 'vue'
+import { onMounted,reactive,computed } from 'vue'
 import type { PersonalFormDTO } from '@/models/PersonalFormDTO'
 const personalInfoStore = usePersonalInfoStore()
 const personOverView = usePersonalInfoStore().data
@@ -25,6 +25,26 @@ const formState = reactive<
   birthPlace: '',
   language: '',
   agree: false,
+})
+
+const zodiacIcons: Record<string, string> = {
+  aries: '/images/content/icon1.png',
+  taurus: '/images/content/icon2.png',
+  gemini: '/images/content/icon3.png',
+  cancer: '/images/content/icon4.png',
+  leo: '/images/content/icon5.png',
+  virgo: '/images/content/icon6.png',
+  libra: '/images/content/icon7.png',
+  scorpio: '/images/content/icon8.png',
+  sagittarius: '/images/content/icon9.png',
+  capricorn: '/images/content/icon10.png',
+  aquarius: '/images/content/icon11.png',
+  pisces: '/images/content/icon12.png',
+}
+
+const zodiacIcon = computed(() => {
+  const sign = personOverView.sign?.toLowerCase() || ''
+  return zodiacIcons[sign] || '/images/content/default.png'
 })
 
 onMounted(async () => {
@@ -1045,7 +1065,7 @@ onMounted(async () => {
                     <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                       <div class="hs_sign_box-overview">
                           <div class="sign_box_img">
-                            <img src="/images/content/icon1.png" alt="icon1">
+                            <img :src="zodiacIcon" :alt="personOverView.sign" />
                           </div>
 						           </div>
                     </div>

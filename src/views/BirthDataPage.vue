@@ -14,11 +14,13 @@ const router = useRouter()
 const personalInfoStore = usePersonalInfoStore()
 const authStore = useAuthStore()
 
-const formState = reactive<PersonalFormDTO & {
-  nameOne: string
-  gender: string
-  agree: boolean
-}>({
+const formState = reactive<
+  PersonalFormDTO & {
+    nameOne: string
+    gender: string
+    agree: boolean
+  }
+>({
   userId: '',
   nameOne: '',
   gender: '',
@@ -26,7 +28,7 @@ const formState = reactive<PersonalFormDTO & {
   birthTime: '',
   birthPlace: '',
   language: '',
-  agree: false
+  agree: false,
 })
 
 const userIdFromStore = authStore.user?.id
@@ -49,7 +51,7 @@ const validateForm = () => {
   errors.language = !formState.language
   errors.agree = !formState.agree
 
-  return !Object.values(errors).some(e => e) // true if no errors
+  return !Object.values(errors).some((e) => e) // true if no errors
 }
 
 const fetchDataAndNavigate = async () => {
@@ -59,7 +61,7 @@ const fetchDataAndNavigate = async () => {
 
   loadingStore.start()
   try {
-    formState.userId=userIdFromStore
+    formState.userId = userIdFromStore
     await personalInfoStore.loadPersonalInfo(formState)
     router.push('/birthChart')
   } catch (err) {
@@ -79,30 +81,22 @@ watch(
 </script>
 <template>
   <div class="slider-area">
-    <div
-      id="carousel-example-generic"
-      class="carousel slide"
-      data-ride="carousel"
-    >
-      <div
-        class="carousel-inner"
-        role="listbox"
-      >
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
         <div class="item active">
           <div class="carousel-captions caption-1">
             <div class="container">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="content">
-                    <h1 data-animation="animated bounceInLeft"> {{ t('birthData.title') }}</h1>
+                    <h1 data-animation="animated bounceInLeft">{{ t('birthData.title') }}</h1>
                     <h2 data-animation="animated zoomInDown">{{ t('birthData.subTitle') }}</h2>
                     <p data-animation="animated bounceInUp">{{ t('birthData.description') }}</p>
                     <div class="hs_effect_btn">
                       <ul>
-                        <li data-animation="animated flipInX"><a
-                          href="#"
-                          class="hs_btn_hover"
-                        >{{ t('birthData.btnReadMore') }}</a></li>
+                        <li data-animation="animated flipInX">
+                          <a href="#" class="hs_btn_hover">{{ t('birthData.btnReadMore') }}</a>
+                        </li>
                       </ul>
                     </div>
                     <div class="clear" />
@@ -121,10 +115,11 @@ watch(
                           </div>
                           <div class="hs_slider_tabs_icon_cont_wrapper">
                             <ul>
-                              <li><a
-                                href="#"
-                                class="hs_tabs_btn"
-                              >{{ t('birthData.healingCategory.family') }}</a></li>
+                              <li>
+                                <a href="#" class="hs_tabs_btn">{{
+                                  t('birthData.healingCategory.family')
+                                }}</a>
+                              </li>
                             </ul>
                           </div>
                         </div>
@@ -139,10 +134,11 @@ watch(
                           </div>
                           <div class="hs_slider_tabs_icon_cont_wrapper">
                             <ul>
-                              <li><a
-                                href="#"
-                                class="hs_tabs_btn"
-                              >{{ t('birthData.healingCategory.presonality') }}</a></li>
+                              <li>
+                                <a href="#" class="hs_tabs_btn">{{
+                                  t('birthData.healingCategory.presonality')
+                                }}</a>
+                              </li>
                             </ul>
                           </div>
                         </div>
@@ -160,10 +156,11 @@ watch(
                                 </div>
                                 <div class="hs_slider_tabs_icon_cont_wrapper">
                                   <ul>
-                                    <li><a
-                                      href="#"
-                                      class="hs_tabs_btn"
-                                    >{{ t('birthData.healingCategory.relationship') }}</a></li>
+                                    <li>
+                                      <a href="#" class="hs_tabs_btn">{{
+                                        t('birthData.healingCategory.relationship')
+                                      }}</a>
+                                    </li>
                                   </ul>
                                 </div>
                               </div>
@@ -178,10 +175,11 @@ watch(
                                 </div>
                                 <div class="hs_slider_tabs_icon_cont_wrapper">
                                   <ul>
-                                    <li><a
-                                      href="#"
-                                      class="hs_tabs_btn"
-                                    >{{ t('birthData.healingCategory.career') }}</a></li>
+                                    <li>
+                                      <a href="#" class="hs_tabs_btn">{{
+                                        t('birthData.healingCategory.career')
+                                      }}</a>
+                                    </li>
                                   </ul>
                                 </div>
                               </div>
@@ -189,7 +187,6 @@ watch(
                           </div>
                         </div>
                       </div>
-                         
                     </div>
                   </div>
                 </div>
@@ -197,146 +194,146 @@ watch(
             </div>
           </div>
         </div>
-      
+
         <div class="carousel-nevigation">
-          <a
-            class="prev"
-            href="#carousel-example-generic"
-            role="button"
-            data-slide="prev"
-          >
+          <a class="prev" href="#carousel-example-generic" role="button" data-slide="prev">
             <i class="fa fa-sign-out" />
           </a>
-          <a
-            class="next"
-            href="#carousel-example-generic"
-            role="button"
-            data-slide="next"
-          >
+          <a class="next" href="#carousel-example-generic" role="button" data-slide="next">
             <i class="fa fa-sign-in" />
           </a>
         </div>
       </div>
     </div>
   </div>
-  <div class="hs_sign_main_wrapper" style="margin-bottom: 3rem;">
+  <div class="hs_sign_main_wrapper" style="margin-bottom: 3rem">
     <!-- hs_slider_bottom_wrapper Start -->
     <div class="hs_slider_bottom_wrapper">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="hs_slider_bottom_box">
-             <div class="container">
-              <form>
-                <div class="row">
-                  <!-- Column 1 -->
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <label>{{ t('birthData.birthDataForm.name') }}</label>
-                      <input
-                        v-model="formState.nameOne"
-                        type="text"
-                        class="form-control"
-                        :class="{ 'is-invalid': errors.nameOne }"
-                        placeholder="Enter your name"
-                      >
+              <div class="container">
+                <form>
+                  <div class="row">
+                    <!-- Column 1 -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>{{ t('birthData.birthDataForm.name') }}</label>
+                        <input
+                          v-model="formState.nameOne"
+                          type="text"
+                          class="form-control"
+                          :class="{ 'is-invalid': errors.nameOne }"
+                          placeholder="Enter your name"
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <label>{{ t('birthData.birthDataForm.gender') }}</label>
+                        <select
+                          v-model="formState.gender"
+                          class="form-control"
+                          :class="{ 'is-invalid': errors.gender }"
+                        >
+                          <option value="">-- Select --</option>
+                          <option value="male">{{ t('birthData.birthDataForm.male') }}</option>
+                          <option value="female">{{ t('birthData.birthDataForm.female') }}</option>
+                        </select>
+                      </div>
                     </div>
 
-                    <div class="form-group">
-                      <label>{{ t('birthData.birthDataForm.gender') }}</label>
-                      <select v-model="formState.gender" class="form-control"  :class="{ 'is-invalid': errors.gender }">
-                        <option value="">-- Select --</option>
-                        <option value="male">{{ t('birthData.birthDataForm.male') }}</option>
-                        <option value="female">{{ t('birthData.birthDataForm.female') }}</option>
-                      </select>
-                    </div>
-                  </div>
+                    <!-- Column 2 -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>{{ t('birthData.birthDataForm.birthDate') }}</label>
+                        <input
+                          v-model="formState.birthDate"
+                          type="date"
+                          class="form-control"
+                          :class="{ 'is-invalid': errors.birthDate }"
+                        />
+                      </div>
 
-                  <!-- Column 2 -->
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <label>{{ t('birthData.birthDataForm.birthDate') }}</label>
-                      <input
-                        v-model="formState.birthDate"
-                        type="date"
-                        class="form-control"
-                        :class="{ 'is-invalid': errors.birthDate }"
-                      >
-                    </div>
-
-                    <div class="form-group">
-                      <label>{{ t('birthData.birthDataForm.birthTime') }}</label>
-                      <input
-                        v-model="formState.birthTime"
-                        type="time"
-                        class="form-control"
-                        :class="{ 'is-invalid': errors.birthTime }"
-                      >
-                      
-                    </div>
-                    
-                  </div>
-
-                  <!-- Column 3 -->
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <label>{{ t('birthData.birthDataForm.birthPlace') }}</label>
-                      <input
-                        v-model="formState.birthPlace"
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter your birth place"
-                         :class="{ 'is-invalid': errors.birthPlace }"
-                      >
+                      <div class="form-group">
+                        <label>{{ t('birthData.birthDataForm.birthTime') }}</label>
+                        <input
+                          v-model="formState.birthTime"
+                          type="time"
+                          class="form-control"
+                          :class="{ 'is-invalid': errors.birthTime }"
+                        />
+                      </div>
                     </div>
 
-                    <div class="form-group">
-                      <label>{{ t('birthData.birthDataForm.language') }}</label>
-                      <select v-model="formState.language" class="form-control"
-                       :class="{ 'is-invalid': errors.language }">
-                        <option value="">-- Select --</option>
-                        <option value="English">English</option>
-                        <option value="Myanmar">မြန်မာ</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+                    <!-- Column 3 -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>{{ t('birthData.birthDataForm.birthPlace') }}</label>
+                        <input
+                          v-model="formState.birthPlace"
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter your birth place"
+                          :class="{ 'is-invalid': errors.birthPlace }"
+                        />
+                      </div>
 
-                <!-- Checkbox (full width row) -->
-                <div class="row mt-3">
-                  <div class="col-lg-12">
-                    <div class="form-check">
-                      <input
-                        id="agreeCheckbox"
-                        v-model="formState.agree"
-                        type="checkbox"
-                        class="form-check-input"
-                        :class="{ 'is-invalid': errors.agree }"
-                      >
-                      <label for="agreeCheckbox" class="form-check-label" style="padding-left: 1rem;" :class="{ 'error-text': errors.agree }" >
-                        {{ t('birthData.birthDataForm.teamAndConduction') }}
-                      </label>
-                       <div class="privacy-note" style="padding-bottom: 1rem;">
-                         {{ t('birthData.birthDataForm.note') }}
+                      <div class="form-group">
+                        <label>{{ t('birthData.birthDataForm.language') }}</label>
+                        <select
+                          v-model="formState.language"
+                          class="form-control"
+                          :class="{ 'is-invalid': errors.language }"
+                        >
+                          <option value="">-- Select --</option>
+                          <option value="English">English</option>
+                          <option value="Myanmar">မြန်မာ</option>
+                        </select>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <!-- Submit button -->
-                <div class="row mt-3">
-                  <div class="col-lg-12">
-                    <button
-                      type="button"
-                      class="btn-purple"
-                      @click.prevent="fetchDataAndNavigate"
-                    >
-                        {{ t('birthData.birthDataForm.submit') }}
-                    </button>
+                  <!-- Checkbox (full width row) -->
+                  <div class="row mt-3">
+                    <div class="col-lg-12">
+                      <div class="form-check">
+                        <input
+                          id="agreeCheckbox"
+                          v-model="formState.agree"
+                          type="checkbox"
+                          class="form-check-input"
+                          :class="{ 'is-invalid': errors.agree }"
+                        />
+                        <label
+                          for="agreeCheckbox"
+                          class="form-check-label"
+                          style="padding-left: 1rem"
+                          :class="{ 'error-text': errors.agree }"
+                        >
+                          {{ t('birthData.birthDataForm.teamAndConduction') }}
+                        </label>
+                        <div class="privacy-note" style="padding-bottom: 1rem">
+                          {{ t('birthData.birthDataForm.note') }}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </form>
-             </div>
+
+                  <!-- Submit button -->
+                  <div class="row mt-3">
+                    <div class="col-lg-12">
+                      <button
+                        type="button"
+                        class="btn-purple"
+                        @click.prevent="fetchDataAndNavigate"
+                      >
+                        {{ t('birthData.birthDataForm.submit') }}
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>

@@ -1,12 +1,12 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
   extends: [
     'eslint:recommended',
     'plugin:vue/vue3-recommended',
-    'plugin:prettier/recommended' // ✅ Prettier plugin
+    'plugin:prettier/recommended', // ✅ Prettier plugin
   ],
   rules: {
     'prettier/prettier': [
@@ -16,8 +16,8 @@ module.exports = {
         semi: false,
         singleQuote: true,
         printWidth: 100,
-        tabWidth: 2
-      }
-    ]
-  }
+        tabWidth: 2,
+      },
+    ],
+  },
 }

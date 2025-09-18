@@ -17,13 +17,13 @@ const i18n = createI18n({
   messages: {
     en: {
       ...enBase,
-      journey: enJourneyOverview
+      journey: enJourneyOverview,
     },
     my: {
       ...myBase,
-      journey: myJourneyOverview
-    }
-  }
+      journey: myJourneyOverview,
+    },
+  },
 })
 
 export default i18n

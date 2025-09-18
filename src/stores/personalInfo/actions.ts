@@ -1,4 +1,4 @@
-import AxiosWithAuth from '@/configs/axiosConfig' 
+import AxiosWithAuth from '@/configs/axiosConfig'
 import { useRootStore } from './root'
 import type { AxiosError } from 'axios'
 import type { PersonalInfoStore } from '.'
@@ -7,11 +7,11 @@ import type { PersonalOverViewDTO } from '@/models/PersonalOverViewDTO'
 
 const personalInfoUrl = 'users/personal-inside-data-overview'
 export const actions = {
-  async loadPersonalInfo(formData:  PersonalFormDTO) {
+  async loadPersonalInfo(formData: PersonalFormDTO) {
     const state = this as PersonalInfoStore
     const rootStore = useRootStore()
     try {
-      const { data } = await AxiosWithAuth.post(personalInfoUrl,formData)
+      const { data } = await AxiosWithAuth.post(personalInfoUrl, formData)
       state.data = data as PersonalOverViewDTO
     } catch (err) {
       const error = err as AxiosError<string>
@@ -24,5 +24,5 @@ export const actions = {
   clearData() {
     const state = this as PersonalInfoStore
     state.data = {} as PersonalOverViewDTO
-  }
+  },
 }

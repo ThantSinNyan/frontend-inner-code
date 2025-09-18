@@ -1,14 +1,7 @@
 <template>
   <div class="v-2_home_slider slider-area">
-    <div
-      id="carousel-example-generic"
-      class="carousel slide"
-      data-ride="carousel"
-    >
-      <div
-        class="carousel-inner"
-        role="listbox"
-      >
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
         <div class="item active">
           <div class="carousel-captions caption-1">
             <div class="container">
@@ -17,13 +10,20 @@
                   <div class="content">
                     <h1 data-animation="animated bounceInLeft">Welcome To</h1>
                     <h2 data-animation="animated zoomInDown">the <span>Inner</span> Code</h2>
-                    <p data-animation="animated bounceInUp">A self-healing platform that blends astrology, mindfulness, and AI to help users deeply understand themselves and begin a personalized healing journey based on their unique astrological signs and inner nature. We aim to offer a complete space for spiritual growth, bringing together healing meditations, guided journaling, and daily affirmations—all in one place. It’s designed to be a supportive and suitable environment for anyone seeking emotional balance, self-awareness, and spiritual practice.</p>
+                    <p data-animation="animated bounceInUp">
+                      A self-healing platform that blends astrology, mindfulness, and AI to help
+                      users deeply understand themselves and begin a personalized healing journey
+                      based on their unique astrological signs and inner nature. We aim to offer a
+                      complete space for spiritual growth, bringing together healing meditations,
+                      guided journaling, and daily affirmations—all in one place. It’s designed to
+                      be a supportive and suitable environment for anyone seeking emotional balance,
+                      self-awareness, and spiritual practice.
+                    </p>
                     <div class="hs_effect_btn">
                       <ul>
-                        <li data-animation="animated flipInX"><a
-                          href="#"
-                          class="hs_btn_hover"
-                        >Read more</a></li>
+                        <li data-animation="animated flipInX">
+                          <a href="#" class="hs_btn_hover">Read more</a>
+                        </li>
                       </ul>
                     </div>
                     <div class="clear" />
@@ -42,10 +42,7 @@
                           </div>
                           <div class="hs_slider_tabs_icon_cont_wrapper">
                             <ul>
-                              <li><a
-                                href="#"
-                                class="hs_tabs_btn"
-                              >Family</a></li>
+                              <li><a href="#" class="hs_tabs_btn">Family</a></li>
                             </ul>
                           </div>
                         </div>
@@ -60,10 +57,7 @@
                           </div>
                           <div class="hs_slider_tabs_icon_cont_wrapper">
                             <ul>
-                              <li><a
-                                href="#"
-                                class="hs_tabs_btn"
-                              >Personality</a></li>
+                              <li><a href="#" class="hs_tabs_btn">Personality</a></li>
                             </ul>
                           </div>
                         </div>
@@ -81,10 +75,7 @@
                                 </div>
                                 <div class="hs_slider_tabs_icon_cont_wrapper">
                                   <ul>
-                                    <li><a
-                                      href="#"
-                                      class="hs_tabs_btn"
-                                    >Relaitionship</a></li>
+                                    <li><a href="#" class="hs_tabs_btn">Relaitionship</a></li>
                                   </ul>
                                 </div>
                               </div>
@@ -99,10 +90,7 @@
                                 </div>
                                 <div class="hs_slider_tabs_icon_cont_wrapper">
                                   <ul>
-                                    <li><a
-                                      href="#"
-                                      class="hs_tabs_btn"
-                                    >Financial</a></li>
+                                    <li><a href="#" class="hs_tabs_btn">Financial</a></li>
                                   </ul>
                                 </div>
                               </div>
@@ -110,7 +98,6 @@
                           </div>
                         </div>
                       </div>
-                                            
                     </div>
                   </div>
                 </div>
@@ -119,20 +106,23 @@
           </div>
         </div>
         <div class="item">
-          <div class=" carousel-captions caption-2">
+          <div class="carousel-captions caption-2">
             <div class="container">
               <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                   <div class="content">
                     <h1 data-animation="animated bounceInLeft">Welcome To</h1>
                     <h2 data-animation="animated zoomInDown">the <span>Jyotish</span> Astrology</h2>
-                    <p data-animation="animated bounceInUp">Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi <br> elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio.</p>
+                    <p data-animation="animated bounceInUp">
+                      Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis
+                      bibendum auctor, nisi <br />
+                      elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio.
+                    </p>
                     <div class="hs_effect_btn">
                       <ul>
-                        <li data-animation="animated flipInX"><a
-                          href="#"
-                          class="hs_btn_hover"
-                        >Read more</a></li>
+                        <li data-animation="animated flipInX">
+                          <a href="#" class="hs_btn_hover">Read more</a>
+                        </li>
                       </ul>
                     </div>
                     <div class="clear" />
@@ -151,10 +141,7 @@
                           </div>
                           <div class="hs_slider_tabs_icon_cont_wrapper">
                             <ul>
-                              <li><a
-                                href="#"
-                                class="hs_tabs_btn"
-                              >Vasthusastra</a></li>
+                              <li><a href="#" class="hs_tabs_btn">Vasthusastra</a></li>
                             </ul>
                           </div>
                         </div>
@@ -169,10 +156,7 @@
                           </div>
                           <div class="hs_slider_tabs_icon_cont_wrapper">
                             <ul>
-                              <li><a
-                                href="#"
-                                class="hs_tabs_btn"
-                              >Carrer Tarot</a></li>
+                              <li><a href="#" class="hs_tabs_btn">Carrer Tarot</a></li>
                             </ul>
                           </div>
                         </div>
@@ -190,10 +174,7 @@
                                 </div>
                                 <div class="hs_slider_tabs_icon_cont_wrapper">
                                   <ul>
-                                    <li><a
-                                      href="#"
-                                      class="hs_tabs_btn"
-                                    >Love Tarot</a></li>
+                                    <li><a href="#" class="hs_tabs_btn">Love Tarot</a></li>
                                   </ul>
                                 </div>
                               </div>
@@ -208,10 +189,7 @@
                                 </div>
                                 <div class="hs_slider_tabs_icon_cont_wrapper">
                                   <ul>
-                                    <li><a
-                                      href="#"
-                                      class="hs_tabs_btn"
-                                    >Numerology</a></li>
+                                    <li><a href="#" class="hs_tabs_btn">Numerology</a></li>
                                   </ul>
                                 </div>
                               </div>
@@ -219,7 +197,6 @@
                           </div>
                         </div>
                       </div>
-                                            
                     </div>
                   </div>
                 </div>
@@ -235,13 +212,16 @@
                   <div class="content">
                     <h1 data-animation="animated bounceInLeft">Welcome To</h1>
                     <h2 data-animation="animated zoomInDown">the <span>Jyotish</span> Astrology</h2>
-                    <p data-animation="animated bounceInUp">Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi <br> elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio.</p>
+                    <p data-animation="animated bounceInUp">
+                      Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis
+                      bibendum auctor, nisi <br />
+                      elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio.
+                    </p>
                     <div class="hs_effect_btn">
                       <ul>
-                        <li data-animation="animated flipInX"><a
-                          href="#"
-                          class="hs_btn_hover"
-                        >Read more</a></li>
+                        <li data-animation="animated flipInX">
+                          <a href="#" class="hs_btn_hover">Read more</a>
+                        </li>
                       </ul>
                     </div>
                     <div class="clear" />
@@ -260,10 +240,7 @@
                           </div>
                           <div class="hs_slider_tabs_icon_cont_wrapper">
                             <ul>
-                              <li><a
-                                href="#"
-                                class="hs_tabs_btn"
-                              >Vasthusastra</a></li>
+                              <li><a href="#" class="hs_tabs_btn">Vasthusastra</a></li>
                             </ul>
                           </div>
                         </div>
@@ -278,10 +255,7 @@
                           </div>
                           <div class="hs_slider_tabs_icon_cont_wrapper">
                             <ul>
-                              <li><a
-                                href="#"
-                                class="hs_tabs_btn"
-                              >Carrer Tarot</a></li>
+                              <li><a href="#" class="hs_tabs_btn">Carrer Tarot</a></li>
                             </ul>
                           </div>
                         </div>
@@ -299,10 +273,7 @@
                                 </div>
                                 <div class="hs_slider_tabs_icon_cont_wrapper">
                                   <ul>
-                                    <li><a
-                                      href="#"
-                                      class="hs_tabs_btn"
-                                    >Love Tarot</a></li>
+                                    <li><a href="#" class="hs_tabs_btn">Love Tarot</a></li>
                                   </ul>
                                 </div>
                               </div>
@@ -317,10 +288,7 @@
                                 </div>
                                 <div class="hs_slider_tabs_icon_cont_wrapper">
                                   <ul>
-                                    <li><a
-                                      href="#"
-                                      class="hs_tabs_btn"
-                                    >Numerology</a></li>
+                                    <li><a href="#" class="hs_tabs_btn">Numerology</a></li>
                                   </ul>
                                 </div>
                               </div>
@@ -328,7 +296,6 @@
                           </div>
                         </div>
                       </div>
-                                            
                     </div>
                   </div>
                 </div>
@@ -337,20 +304,10 @@
           </div>
         </div>
         <div class="carousel-nevigation">
-          <a
-            class="prev"
-            href="#carousel-example-generic"
-            role="button"
-            data-slide="prev"
-          >
+          <a class="prev" href="#carousel-example-generic" role="button" data-slide="prev">
             <i class="fa fa-sign-out" />
           </a>
-          <a
-            class="next"
-            href="#carousel-example-generic"
-            role="button"
-            data-slide="next"
-          >
+          <a class="next" href="#carousel-example-generic" role="button" data-slide="next">
             <i class="fa fa-sign-in" />
           </a>
         </div>

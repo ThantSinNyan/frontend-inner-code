@@ -19,7 +19,7 @@ export const useAuthStore = defineStore('auth', () => {
         id: res.data.userId,
         role: res.data.role,
         name: res.data.name,
-        email: res.data.email
+        email: res.data.email,
       }
 
       localStorage.setItem('token', token.value)
@@ -32,21 +32,21 @@ export const useAuthStore = defineStore('auth', () => {
       return false
     }
   }
-    const register = async (payload: {
-      name: string
-      email: string
-      password: string
-      confirmPassword: string
-    }) => {
-      try {
-        const { data } = await AxiosWithAuth.post('auth/register', payload)
-        return data // you can return a success message or user object from backend
-      } catch (err) {
-        const error = err as AxiosError<string>
-        console.error('Registration failed:', error?.response?.data || err)
-        throw error
-      }
+  const register = async (payload: {
+    name: string
+    email: string
+    password: string
+    confirmPassword: string
+  }) => {
+    try {
+      const { data } = await AxiosWithAuth.post('auth/register', payload)
+      return data // you can return a success message or user object from backend
+    } catch (err) {
+      const error = err as AxiosError<string>
+      console.error('Registration failed:', error?.response?.data || err)
+      throw error
     }
+  }
 
   const logout = () => {
     token.value = null
@@ -56,12 +56,15 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const startAutoLogout = () => {
-    clearTimeout((startAutoLogout as any)._timer) 
-    ;(startAutoLogout as any)._timer = setTimeout(() => {
-      logout()
-      alert('Session expired. Please login again.')
-      window.location.href = '/register' 
-    }, 10 * 60 * 1000)
+    clearTimeout((startAutoLogout as any)._timer)
+    ;(startAutoLogout as any)._timer = setTimeout(
+      () => {
+        logout()
+        alert('Session expired. Please login again.')
+        window.location.href = '/register'
+      },
+      10 * 60 * 1000
+    )
   }
 
   return {
@@ -71,6 +74,6 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     logout,
     startAutoLogout,
-    register
+    register,
   }
 })

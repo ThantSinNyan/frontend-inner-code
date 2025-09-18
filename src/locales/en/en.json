@@ -5,10 +5,10 @@
     "description": "Enter your birth date, time, and place to uncover your Chiron wound and House placement—the key to understanding your emotional pain and life challenges. This is the first step in creating your personalized healing journey based on your unique astrological blueprint.",
     "btnReadMore": "Read More",
     "healingCategory": {
-       "family": "Family",
-       "presonality": "Personality",
-       "relationship": "Relationship",
-       "career": "Career"
+      "family": "Family",
+      "presonality": "Personality",
+      "relationship": "Relationship",
+      "career": "Career"
     },
     "birthDataForm": {
       "name": "My Name Is",
@@ -21,25 +21,24 @@
       "gender": "Gender",
       "submit": "Submit",
       "btnBarChart": "SEE BIRTH CHART",
-      "note": "",
+      "note": "We respect your privacy. Your information will never be shared with others, and your birth data will not be permanently stored in our system.",
       "birthTime": "BirthTime"
-
     }
   },
-  "menuBar":{
+  "menuBar": {
     "home": "Home",
     "aboutUs": "AboutUs",
     "services": "Services",
     "content": "Contact",
     "btnStartJourney": "Start Journey"
   },
-  "navBar":{
+  "navBar": {
     "search": "Search Here",
     "login": "Login",
     "register": "Register"
   },
   "footer": {
-    "description":  "We are a spiritual healing platform that blends astrology, mindfulness, and AI to guide individuals on a personalized journey of self-discovery and emotional growth.",
+    "description": "We are a spiritual healing platform that blends astrology, mindfulness, and AI to guide individuals on a personalized journey of self-discovery and emotional growth.",
     "quickLinks": "Quick Links",
     "home": "Home",
     "about": "About",
@@ -49,5 +48,4 @@
     "aboutUs": "About Us",
     "contactUs": "Contact Us"
   }
-  
 }

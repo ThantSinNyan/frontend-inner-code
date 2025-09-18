@@ -3,7 +3,7 @@ import router from '@/router'
 import { useAuthStore } from '@/stores/auth/auth'
 
 const AxiosWithAuth = axios.create({
-  baseURL: import.meta.env.VITE_API_URL, 
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -28,10 +28,9 @@ AxiosWithAuth.interceptors.response.use(
 
       if (refreshToken) {
         try {
-          const { data } = await axios.post(
-            `${import.meta.env.VITE_API_URL}/auth/refresh`,
-            { refreshToken }
-          )
+          const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/auth/refresh`, {
+            refreshToken,
+          })
           localStorage.setItem('access_token', data.accessToken)
           authStore.token = data.accessToken
           error.config.headers.Authorization = `Bearer ${data.accessToken}`

@@ -1015,14 +1015,18 @@ const personOverView = usePersonalInfoStore().data
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="hs_ar_first_sec_wrapper">
                   <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                      <div class="hs_ar_first_sec_img_wrapper">
-                        <img
-                          src="/images/content/kundali/aries_img_2.png"
-                          alt="arlies_img"
-                        >
-                      </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                      <div class="hs_sign_box">
+                          <div class="sign_box_img">
+                            <img src="/images/content/icon1.png" alt="icon1">
+                          </div>
+                          <div class="sign_box_cont">
+                            <h2>Aries</h2>
+                            <p>31 Mar - 12 Oct</p>
+                          </div>
+						           </div>
                     </div>
+                   <br></br>
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                       <div class="hs_ar_first_sec_img_cont_wrapper">
                         <p>{{personOverView.description}}</p>
@@ -1163,17 +1167,14 @@ const personOverView = usePersonalInfoStore().data
                   </div>
                   <div class="hs_blog_right_cate_list_cont_wrapper">
                     <ul>
-                      <li><a href="#">Day 1: Meeting the Inner Child</a></li>
-                      <li><a href="#">Day 2: Emotional Permission</a></li>
-                      <li><a href="#">Day 3: The Armor of Anger</a></li>
-                      <li><a href="#">Day 4: Seeking Approval</a></li>
-                      <li><a href="#">Day 5: The Fear of Exposure</a></li>
-                      <li><a href="#">Day 6: Trusting My Inner World</a></li>
-                      <li><a href="#">Day 7: The Wound as a Guide</a></li>
-                      <li><a href="#">Day 8: Building My Own Safety</a></li>
-                      <li><a href="#">Day 9: Releasing the Past</a></li>
-                      <li><a href="#">Day 10: Transforming Isolation</a></li>
-                      <li><a href="#">Final Thought</a></li>
+                      <li v-for="(plan, index) in personOverView.healingPlans" :key="plan.id">
+                        <a href="#">
+                          Day {{ index + 1 }}: {{ plan.activity }}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">Final Analysis</a>
+                      </li>
                     </ul>
                   </div>
                 </div>

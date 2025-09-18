@@ -4,9 +4,9 @@ import type { PersonalOverViewDTO } from '@/models/PersonalOverViewDTO'
 
 export const usePersonalInfoStore = defineStore('personalInfo', {
   state: () => ({
-    data: {} as PersonalOverViewDTO
+    data: {} as PersonalOverViewDTO,
   }),
   actions,
-  persist: true 
+  persist: true,
 })
 export type PersonalInfoStore = ReturnType<typeof usePersonalInfoStore>

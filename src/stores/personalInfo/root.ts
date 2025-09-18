@@ -6,8 +6,8 @@ export const useRootStore = defineStore('root', {
     showErrorModal: false,
     detailModal: {
       title: '',
-      message: ''
-    }
+      message: '',
+    },
   }),
   actions: {
     setDetailModal(title: string, message: string) {
@@ -15,8 +15,8 @@ export const useRootStore = defineStore('root', {
     },
     setErrorModal(show: boolean) {
       this.showErrorModal = show
-    }
-  }
+    },
+  },
 })
 export const useLoadingStore = defineStore('loading', {
   state: () => ({
@@ -30,7 +30,6 @@ export const useLoadingStore = defineStore('loading', {
       this.isLoading = false
     },
   },
-  
 })
 export const languageStore = defineStore('loading', {
   state: () => ({
@@ -53,6 +52,6 @@ export const useLanguageStore = defineStore('language', () => {
   })
 
   return {
-    language
+    language,
   }
 })

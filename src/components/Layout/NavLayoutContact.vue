@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useLoadingStore } from '@/stores/personalInfo/root';
-import { useLanguageStore } from '@/stores/personalInfo/root';
+import { useLoadingStore } from '@/stores/personalInfo/root'
+import { useLanguageStore } from '@/stores/personalInfo/root'
 import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth/auth'
@@ -17,7 +17,7 @@ const toggleDropdown = () => {
 }
 
 const changeLanguage = (lang: string) => {
-  currentLang.value=lang
+  currentLang.value = lang
   isDropdownOpen.value = false
   locale.value = lang
   localStorage.setItem('language', lang)
@@ -29,16 +29,16 @@ const currentLang = computed({
     languageStore.language = val
     locale.value = val
     isDropdownOpen.value = false
-  }
+  },
 })
 
 const currentLabel = computed(() => {
-   return currentLang.value === 'en' ? 'English' : 'မြန်မာ'
+  return currentLang.value === 'en' ? 'English' : 'မြန်မာ'
 })
 
 const handleLogout = () => {
-  authStore.logout() 
-  router.push('/login') 
+  authStore.logout()
+  router.push('/login')
 }
 
 onMounted(() => {
@@ -55,12 +55,11 @@ const goToLogin = () => {
 const goToRegister = () => {
   router.push('/register')
 }
-
 </script>
 <template>
   <div v-if="loadingStore.isLoading" id="preloader">
     <div id="status">
-      <img id="preloader_image" src="/images/header/horoscope.gif" alt="loader">
+      <img id="preloader_image" src="/images/header/horoscope.gif" alt="loader" />
     </div>
   </div>
   <div class="main_header_wrapper">
@@ -71,19 +70,16 @@ const goToRegister = () => {
           <div class="col-lg-6 col-md-7 col-sm-7 col-xs-7">
             <div class="hs_top_right_wrapper">
               <div class="hs_navi_searchbar_wrapper hidden-sm hidden-xs">
-                <input
-                  type="text"
-                  :placeholder="t('navBar.search')"
-                >
+                <input type="text" :placeholder="t('navBar.search')" />
                 <button><i class="fa fa-search" /></button>
               </div>
-                <ul class="cart_login_wrapper">
+              <ul class="cart_login_wrapper">
                 <li class="dropdown menu-button hs_top_user_profile">
                   <a href="#">
-                   <span 
-                      v-if="authStore.user" 
+                    <span
+                      v-if="authStore.user"
                       class="hidden-xs"
-                      style="cursor: pointer;"
+                      style="cursor: pointer"
                       @click="handleLogout"
                     >
                       Logout
@@ -94,26 +90,23 @@ const goToRegister = () => {
               <ul class="cart_login_wrapper">
                 <li class="dropdown menu-button hs_top_user_profile">
                   <a href="#">
-                    <img
-                      src="/images/header/top_user.png"
-                      alt="user"
-                    >
+                    <img src="/images/header/top_user.png" alt="user" />
                     <span v-if="authStore.user" class="hidden-xs">
                       {{ authStore.user.name }}
                     </span>
-                <span v-else class="hidden-xs">
-                  <a style="cursor: pointer;" @click.prevent="goToLogin">
-                    {{ t('navBar.login') }}
-                  </a>
-                  /
-                  <a style="cursor: pointer;" @click.prevent="goToRegister">
-                    {{ t('navBar.register') }}
-                  </a>
-                </span>
+                    <span v-else class="hidden-xs">
+                      <a style="cursor: pointer" @click.prevent="goToLogin">
+                        {{ t('navBar.login') }}
+                      </a>
+                      /
+                      <a style="cursor: pointer" @click.prevent="goToRegister">
+                        {{ t('navBar.register') }}
+                      </a>
+                    </span>
                   </a>
                 </li>
               </ul>
-              <ul class="cart_login_wrapper"> 
+              <ul class="cart_login_wrapper">
                 <li class="dropdown menu-button hs_top_user_profile" @click="toggleDropdown">
                   <a href="javascript:void(0)">
                     <span class="hidden-xs">{{ currentLabel }}</span>
@@ -126,7 +119,7 @@ const goToRegister = () => {
                       <a href="#"><span>မြန်မာ</span></a>
                     </li>
                   </ul>
-                </li>            
+                </li>
               </ul>
             </div>
           </div>
@@ -135,4 +128,3 @@ const goToRegister = () => {
     </div>
   </div>
 </template>
-

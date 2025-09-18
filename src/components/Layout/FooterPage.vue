@@ -15,54 +15,74 @@ const { t } = useI18n()
                 src="/images/content/footer_logo_1.png"
                 alt="footer_logo"
                 class="img-responsive"
-              >
+              />
               <h3>+1800-123-123</h3>
               <p>{{ t('footer.description') }}</p>
-              <h4><a href="#">{{ t('birthData.btnReadMore') }} <i class="fa fa-long-arrow-right" /></a></h4>
+              <h4>
+                <a href="#"
+                  >{{ t('birthData.btnReadMore') }} <i class="fa fa-long-arrow-right"
+                /></a>
+              </h4>
               <ul>
-                <li><a href="#"><i class="fa fa-facebook" /></a></li>
-                <li><a href="#"><i class="fa fa-twitter" /></a></li>
-                <li><a href="#"><i class="fa fa-youtube-play" /></a></li>
-                <li><a href="#"><i class="fa fa-linkedin" /></a></li>
+                <li>
+                  <a href="#"><i class="fa fa-facebook" /></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-twitter" /></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-youtube-play" /></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-linkedin" /></a>
+                </li>
               </ul>
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="hs_footer_list_wrapper">
-              <h2>{{ t('footer.quickLinks') }} </h2>
+              <h2>{{ t('footer.quickLinks') }}</h2>
               <ul class="hs_footer_list">
-                <li><a href="#"><i
-                  class="fa fa-caret-right"
-                  aria-hidden="true"
-                /> {{ t('footer.home') }}</a>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-caret-right" aria-hidden="true" /> {{ t('footer.home') }}</a
+                  >
                 </li>
-                <li><a href="#"><i
-                  class="fa fa-caret-right"
-                  aria-hidden="true"
-                /> {{ t('footer.about') }} </a>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-caret-right" aria-hidden="true" /> {{ t('footer.about') }}
+                  </a>
                 </li>
-                <li><a href="#"><i
-                  class="fa fa-caret-right"
-                  aria-hidden="true"
-                /> {{ t('footer.howItWorks') }} </a>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-caret-right" aria-hidden="true" /> {{ t('footer.howItWorks') }}
+                  </a>
                 </li>
-                <li><a href="#"><i
-                  class="fa fa-caret-right"
-                  aria-hidden="true"
-                /> {{ t('footer.exploreSigns') }}</a>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-caret-right" aria-hidden="true" />
+                    {{ t('footer.exploreSigns') }}</a
+                  >
                 </li>
-                <li><a href="#"><i
-                  class="fa fa-caret-right"
-                  aria-hidden="true"
-                />{{ t('footer.startYourJourney') }}</a> </li>
-                <li><a href="#"><i
-                  class="fa fa-caret-right"
-                  aria-hidden="true"
-                />{{ t('footer.aboutUs') }} </a> </li>
-                <li><a href="#"><i
-                  class="fa fa-caret-right"
-                  aria-hidden="true"
-                />{{ t('footer.contactUs') }}</a> </li>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-caret-right" aria-hidden="true" />{{
+                      t('footer.startYourJourney')
+                    }}</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-caret-right" aria-hidden="true" />{{ t('footer.aboutUs') }}
+                  </a>
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-caret-right" aria-hidden="true" />{{
+                      t('footer.contactUs')
+                    }}</a
+                  >
+                </li>
               </ul>
             </div>
           </div>
@@ -105,10 +125,7 @@ const { t } = useI18n()
   <!-- hs footer wrapper End -->
   <!-- hs bottom footer wrapper Start -->
   <div class="hs_bottom_footer_main_wrapper">
-    <a
-      id="return-to-top"
-      href="javascript:"
-    ><i class="fa fa-angle-up" /></a>
+    <a id="return-to-top" href="javascript:"><i class="fa fa-angle-up" /></a>
     <div class="container">
       <div class="row">
         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
@@ -117,17 +134,13 @@ const { t } = useI18n()
         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
           <div class="footer_bottom_list_wrapper">
             <ul>
-              <li><a href="#">Private policy</a>
-              </li>
-              <li><a href="#">Terms &amp; Conditions</a>
-              </li>
-              <li><a href="#">Refund policy</a>
-              </li>
+              <li><a href="#">Private policy</a></li>
+              <li><a href="#">Terms &amp; Conditions</a></li>
+              <li><a href="#">Refund policy</a></li>
             </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
- 
 </template>

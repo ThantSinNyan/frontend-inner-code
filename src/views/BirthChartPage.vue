@@ -50,6 +50,9 @@ const zodiacIcon = computed(() => {
 onMounted(async () => {
   if (journeyId) {
     await personalInfoStore.loadPersonalInfoById(formState)
+  }else{
+    formState.id=personOverView.value.id
+     await personalInfoStore.loadPersonalInfoById(formState)
   }
 })
 

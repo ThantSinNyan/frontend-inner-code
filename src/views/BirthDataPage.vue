@@ -64,13 +64,14 @@ const fetchDataAndNavigate = async () => {
   try {
     formState.userId = userIdFromStore
     await personalInfoStore.loadAndSavePersonalInfo(formState)
-    router.push('/birthChart')
+    router.push(`/birthChart/${personalInfoStore.data.id}`)
   } catch (err) {
     console.error(err)
   } finally {
     loadingStore.stop()
   }
 }
+
 
 watch(
   () => languageStore.language,

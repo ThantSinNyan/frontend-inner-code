@@ -5,7 +5,7 @@ import type { PersonalInfoStore } from '.'
 import type { PersonalFormDTO } from '@/models/PersonalFormDTO'
 import type { PersonalOverViewDTO } from '@/models/PersonalOverViewDTO'
 
-const personalInfoUrl = 'users/personal-inside-data-overview'
+const personalInfoUrl = 'users/generate-personal-inside-data-overview'
 const personalInfosByUserId = 'users/getHealingJourneyByUserId'
 const personalInfoById = 'users/get-personal-inside-data-overview'
 

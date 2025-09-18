@@ -2,7 +2,34 @@
 import { usePersonalInfoStore } from '@/stores/personalInfo'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
+import { onMounted,reactive } from 'vue'
+import type { PersonalFormDTO } from '@/models/PersonalFormDTO'
+const personalInfoStore = usePersonalInfoStore()
 const personOverView = usePersonalInfoStore().data
+import { useRoute } from 'vue-router'
+const route = useRoute()
+const journeyId = route.params.id 
+const formState = reactive<
+  PersonalFormDTO & {
+    nameOne: string
+    gender: string
+    agree: boolean
+  }
+>({
+  id: journeyId+"",
+  userId: '',
+  nameOne: '',
+  gender: '',
+  birthDate: '',
+  birthTime: '',
+  birthPlace: '',
+  language: '',
+  agree: false,
+})
+
+onMounted(async () => {
+  await personalInfoStore.loadPersonalInfoById(formState)
+})
 
 </script>
 <template>
@@ -1016,13 +1043,9 @@ const personOverView = usePersonalInfoStore().data
                 <div class="hs_ar_first_sec_wrapper">
                   <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-                      <div class="hs_sign_box">
+                      <div class="hs_sign_box-overview">
                           <div class="sign_box_img">
                             <img src="/images/content/icon1.png" alt="icon1">
-                          </div>
-                          <div class="sign_box_cont">
-                            <h2>Aries</h2>
-                            <p>31 Mar - 12 Oct</p>
                           </div>
 						           </div>
                     </div>

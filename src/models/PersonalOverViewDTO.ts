@@ -1,5 +1,6 @@
 import type { HealingPlanDTO } from './HealingPlanDTO'
 export interface PersonalOverViewDTO {
+  id: string
   mainTitle: string
   description: string
   coreWoundsAndEmotionalThemes: string[]

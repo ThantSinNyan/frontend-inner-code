@@ -5,6 +5,7 @@ import type { PersonalOverViewDTO } from '@/models/PersonalOverViewDTO'
 export const usePersonalInfoStore = defineStore('personalInfo', {
   state: () => ({
     data: {} as PersonalOverViewDTO,
+    dataList: [] as PersonalOverViewDTO[],
   }),
   actions,
   persist: true,

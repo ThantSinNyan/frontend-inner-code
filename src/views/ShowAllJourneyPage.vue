@@ -1,10 +1,24 @@
 <script setup>
 import { useRouter } from 'vue-router'
-
+import { usePersonalInfoStore } from '@/stores/personalInfo'
+import { onMounted } from 'vue'
+import { useAuthStore } from '@/stores/auth/auth'
+const authStore = useAuthStore()
 const router = useRouter()
+const personalInfoStore = usePersonalInfoStore()
+const personOverView = usePersonalInfoStore().data
+onMounted(async () => {
+  await personalInfoStore.loadPersonalInfos({
+    userId: authStore.user.id,
+    birthDate: '1999-07-01',
+    birthTime: '08:15',
+    birthPlace: 'Myanmar, Dawei',
+    language: 'English',
+  })
+})
 
-function goToJourney() {
-  router.push('/JourneyDetail')
+function goToJourney(id) {
+  router.push(`/birthChart/${id}`)
 }
 </script>
 <template>
@@ -20,7 +34,7 @@ function goToJourney() {
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 full_width">
           <div class="hs_indx_title_right_wrapper">
             <ul>
-              <li><a href="#">Birth Chart</a> &nbsp;&nbsp;&nbsp;></li>
+                 <li><a href="#">Birth Chart</a> &nbsp;&nbsp;&nbsp;></li>
               <li>Your Journey</li>
             </ul>
           </div>
@@ -47,102 +61,30 @@ function goToJourney() {
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="hs_effect_btn">
             <ul>
-              <li><a href="#" class="hs_btn_hover">+ Create Journey</a></li>
+              <li> <router-link class="hs_btn_hover" to="/birthDataPage">+ Create Journey</router-link></li>
             </ul>
           </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="hs_title_box_main_wrapper">
-            <div class="hs_title_img_wrapper">
-              <img src="/images/content/title_img1.jpg" alt="totle_img" />
-              <ul>
-                <li>Round 1</li>
-              </ul>
-            </div>
-            <div class="hs_title_img_cont_wrapper">
-              <h2><a href="#">Chiron in Leo Hosue 12</a></h2>
-              <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin lorem quis.</p>
-              <h5>
-                <a href="#">Go to Journey<i class="fa fa-long-arrow-right"></i></a>
-              </h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="hs_title_box_main_wrapper">
-            <div class="hs_title_img_wrapper">
-              <img src="/images/content/title_img2.jpg" alt="totle_img" />
-              <ul>
-                <li>$12</li>
-              </ul>
-            </div>
-            <div class="hs_title_img_cont_wrapper">
-              <h2><a href="#">Crystal ball reading</a></h2>
-              <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin lorem quis.</p>
-              <h5>
-                <a href="#">Read More <i class="fa fa-long-arrow-right"></i></a>
-              </h5>
+        <div v-for="(item, index) in personalInfoStore.dataList" :key="index">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="hs_title_box_main_wrapper">
+              <div class="hs_title_img_wrapper">
+                <img src="/images/content/healing-card.jpg" alt="totle_img" />
+                <ul>
+                  <li>Round {{ index+1 }}</li>
+                </ul>
+              </div>
+              <div class="hs_title_img_cont_wrapper">
+                <h2><a href="#">{{ personalInfoStore.data.mainTitle }}</a></h2>
+                <p>  {{ item.description.split(' ').slice(0, 20).join(' ') }}...</p>
+                <h5>
+                  <a href="javascript:void(0)" @click="goToJourney(item.id)">Go to Journey<i class="fa fa-long-arrow-right"></i></a>
+                </h5>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="hs_title_box_main_wrapper">
-            <div class="hs_title_img_wrapper">
-              <img src="/images/content/title_img2.jpg" alt="totle_img" />
-              <ul>
-                <li>$12</li>
-              </ul>
-            </div>
-            <div class="hs_title_img_cont_wrapper">
-              <h2><a href="#">Crystal ball reading</a></h2>
-              <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin lorem quis.</p>
-              <h5>
-                <a href="#">Read More <i class="fa fa-long-arrow-right"></i></a>
-              </h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="hs_title_box_main_wrapper">
-            <div class="hs_title_img_wrapper">
-              <img src="/images/content/title_img2.jpg" alt="totle_img" />
-              <ul>
-                <li>$12</li>
-              </ul>
-            </div>
-            <div class="hs_title_img_cont_wrapper">
-              <h2><a href="#">Crystal ball reading</a></h2>
-              <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin lorem quis.</p>
-              <h5>
-                <a href="#">Read More <i class="fa fa-long-arrow-right"></i></a>
-              </h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="hs_title_box_main_wrapper">
-            <div class="hs_title_img_wrapper">
-              <img src="/images/content/title_img3.jpg" alt="totle_img" />
-              <ul>
-                <li>$22</li>
-              </ul>
-            </div>
-            <div class="hs_title_img_cont_wrapper">
-              <h2><a href="#">Palm Reading</a></h2>
-              <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin lorem quis.</p>
-              <h5>
-                <a href="#">Read More <i class="fa fa-long-arrow-right"></i></a>
-              </h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="hs_effect_btn">
-            <ul>
-              <li><a href="#" class="hs_btn_hover">View All</a></li>
-            </ul>
-          </div>
-        </div>
+
+        </div>  
       </div>
     </div>
   </div>

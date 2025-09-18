@@ -43,7 +43,7 @@ const { t } = useI18n()
         <div class="hs_btn_wrapper hidden-md">
           <ul>
             <li>
-              <router-link class="hs_btn_hover" to="/birthDataPage">{{
+              <router-link class="hs_btn_hover" to="/showAllJourney">{{
                 t('menuBar.btnStartJourney')
               }}</router-link>
             </li>

@@ -21,6 +21,7 @@ const formState = reactive<
     agree: boolean
   }
 >({
+  id:'',
   userId: '',
   nameOne: '',
   gender: '',
@@ -62,7 +63,7 @@ const fetchDataAndNavigate = async () => {
   loadingStore.start()
   try {
     formState.userId = userIdFromStore
-    await personalInfoStore.loadPersonalInfo(formState)
+    await personalInfoStore.loadAndSavePersonalInfo(formState)
     router.push('/birthChart')
   } catch (err) {
     console.error(err)

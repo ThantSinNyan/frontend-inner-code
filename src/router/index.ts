@@ -19,7 +19,7 @@ const routes = [
   { path: '/about', name: 'About', component: AboutPage },
   { path: '/contact', name: 'Contact', component: ContactPage },
   {
-    path: '/birthChart',
+    path: '/birthChart/:id',
     name: 'birthChart',
     component: BirthChartPage,
     meta: { requiresAuth: true },
@@ -37,7 +37,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: '/journeyDetail',
+    path: '/journeyDetail/:id',
     name: 'journeyDetail',
     component: JourneyDetailPage,
     meta: { requiresAuth: true },

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter} from 'vue-router'
 import { usePersonalInfoStore } from '@/stores/personalInfo'
 import { ref } from 'vue'
 const personalInfoStore = usePersonalInfoStore()
-const reflectiveQuestions=personalInfoStore.data.reflectiveQuestions
+const reflectiveQuestions=personalInfoStore.data.reflectiveQuestionDTOs
 const journeyPlanDay1=personalInfoStore.data.healingPlans[0].id
 const router = useRouter()
 const answers = ref<Record<number, string>>({})
@@ -18,6 +18,7 @@ const answerMap: Record<string, string> = {
 function selectAnswer(questionId: number, value: string) {
   answers.value[questionId] = value
 }
+
 async function submitAnswers() {
     window.scrollTo({
     top: 0,

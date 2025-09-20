@@ -37,11 +37,11 @@ AxiosWithAuth.interceptors.response.use(
           return AxiosWithAuth(error.config)
         } catch (err) {
           authStore.logout()
-          router.push({ name: 'register' })
+          router.push({ name: 'login' })
         }
       } else {
         authStore.logout()
-        router.push({ name: 'register' })
+        router.push({ name: 'login' })
       }
     }
     return Promise.reject(error)

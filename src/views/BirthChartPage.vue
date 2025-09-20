@@ -6,9 +6,10 @@ import { onMounted,reactive,computed } from 'vue'
 import type { PersonalFormDTO } from '@/models/PersonalFormDTO'
 const personalInfoStore = usePersonalInfoStore()
 const personOverView = computed(() => personalInfoStore.data)
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
 const route = useRoute()
 const journeyId = route.params.id 
+const router = useRouter()
 const formState = reactive<
   PersonalFormDTO & {
     nameOne: string
@@ -55,6 +56,10 @@ onMounted(async () => {
      await personalInfoStore.loadPersonalInfoById(formState)
   }
 })
+
+function goToJourney(id: number | string) {
+  router.push(`/JourneyDetail/${id}`)
+}
 
 </script>
 <template>
@@ -1191,11 +1196,12 @@ onMounted(async () => {
              
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <div class="hs_kd_six_sec_btn">
-                        <ul>  
-                          <li><router-link
-                            class="hs_btn_hover"
-                            to="/reflectiveQuestion"
-                          >{{ t('journey.refecletiveQuestion') }}</router-link></li>
+                        <ul> 
+                          <li v-if="personOverView.subscription === 'NONE'">
+                            <router-link class="hs_btn_hover" to="/reflectiveQuestion">
+                              {{ t('journey.refecletiveQuestion') }}
+                            </router-link>
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -1216,7 +1222,11 @@ onMounted(async () => {
                   <div class="hs_blog_right_cate_list_cont_wrapper">
                     <ul>
                       <li v-for="(plan, index) in personOverView.healingPlans" :key="plan.id">
-                        <a href="#">
+                        <a
+                          href="#"
+                          :class="{ completed: plan.status === 'COMPLETED' }"
+                          @click.prevent="goToJourney(plan.id)"
+                        >
                           Day {{ index + 1 }}: {{ plan.activity }}
                         </a>
                       </li>

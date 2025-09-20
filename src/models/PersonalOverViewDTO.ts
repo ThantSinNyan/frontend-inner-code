@@ -12,6 +12,6 @@ export interface PersonalOverViewDTO {
   woundPoints: string[]
   patternsConnectedToThisWound: string[]
   healingBenefits: string[]
-  reflectiveQuestions: ReflectiveQuestionDTO[]
+  reflectiveQuestionDTOs: ReflectiveQuestionDTO[]
   healingPlans: HealingPlanDTO[]
 }

@@ -1,3 +1,43 @@
+<script setup lang="ts">
+import { useRouter, useRoute } from 'vue-router'
+import { usePersonalInfoStore } from '@/stores/personalInfo'
+import { ref, watch } from 'vue'
+
+const personalInfoStore = usePersonalInfoStore()
+const journeyPlans = personalInfoStore.data.healingPlans
+
+const route = useRoute()
+const router = useRouter()
+
+const planId = ref(route.params.id)
+
+const isCompleted = ref(false)
+
+function toggleStatus() {
+  isCompleted.value = !isCompleted.value
+}
+
+function goToJourney(id: number | string) {
+  planId.value = String(id) 
+  router.push(`/JourneyDetail/${id}`)
+}
+
+
+const selectedPlan = ref(
+  journeyPlans.find(plan => String(plan.id) === String(route.params.id))
+)
+
+watch(
+  () => route.params.id,
+  (newId) => {
+    planId.value = newId
+    selectedPlan.value = journeyPlans.find(
+      (plan) => String(plan.id) === String(newId)
+    )
+  }
+)
+</script>
+
 <template>
   <div class="hs_indx_title_main_wrapper">
     <div class="hs_title_img_overlay" />
@@ -5,7 +45,7 @@
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 full_width">
           <div class="hs_indx_title_left_wrapper">
-            <h2>Family and Relationships – Inner Child Healing</h2>
+            <h2>{{selectedPlan.activity}}</h2>
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 full_width">
@@ -28,7 +68,12 @@
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="hs_blog_box1_main_wrapper">
                   <div class="hs_blog_box1_img_wrapper">
-                    <img src="/images/content/blog/family_bc1.png" alt="blog_img" />
+                    <img src="/images/content/day/default.png" alt="blog_img" height="300" />
+                     <div class="overlay-heading">
+                        <h2>The Healing Power of your mind</h2>
+                        <h1>You are poweful more than you think</h1>
+                        <p>by The Inner Code</p>
+                    </div>
                     <ul>
                       <li>29 Jul, 2020</li>
                     </ul>
@@ -43,17 +88,11 @@
                     </div>
                     <div class="hs_blog_cont_heading_wrapper">
                       <h2>
-                        Family and Relationships through Inner Child Connection and emotional
-                        release
+                        {{selectedPlan.meditation}}
                       </h2>
                       <h4><span>&nbsp;</span></h4>
                       <p>
-                        This guided meditation gently leads you into a safe, nurturing space where
-                        you can reconnect with your inner child—the part of you that still carries
-                        old emotions, unmet needs, and memories from past relationships. By
-                        acknowledging and embracing this part of yourself, you begin to heal the
-                        emotional wounds that often affect your connections with family and loved
-                        ones.
+                       {{selectedPlan.overview}}
                       </p>
                       <h5>
                         <a href="#">Read More <i class="fa fa-long-arrow-right" /></a>
@@ -92,30 +131,65 @@
                         tension. Wear Comfortable Clothing Avoid tight or restrictive clothes;
                         choose something soft and breathable. Avoid Heavy Meals
                       </p>
-                      <h5>
-                        <a href="#">Read More <i class="fa fa-long-arrow-right" /></a>
-                      </h5>
+                      <button 
+                        class="btn-purple-small"
+                        :class="{ completed: isCompleted }"
+                        @click="toggleStatus"
+                      >
+                        {{ isCompleted ? 'Complete' : 'In Progress' }}
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="hs_blog_box1_main_wrapper hs_blog_box2_main_wrapper">
+                 
+                  <div class="hs_blog_box1_cont_main_wrapper">
+                    <div class="hs_lest_news_meta_wrapper">
+                      <ul>
+                        <li>
+                          <a href="#">By - Admin</a>
+                        </li>
+                        <li>
+                          <a href="#">Journaling Prompt Section</a>
+                        </li>
+                        <li>
+                           <button 
+                              class="btn-purple-icon"
+                              :class="{ completed: isCompleted }"
+                              @click="toggleStatus"
+                            >
+                              {{ isCompleted ? 'Complete' : 'In Progress' }}
+                           </button>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="hs_blog_cont_heading_wrapper">
+                      <div 
+                          v-for="(prompt, index) in selectedPlan.prompts" 
+                          :key="prompt.id || index" 
+                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                        >
+                          <h4 style="margin-top: 30px;">
+                            {{ prompt.question }}
+                          </h4>
 
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 visible-lg visible-md">
-                <div class="pager_wrapper">
-                  <ul class="pagination">
-                    <li>
-                      <a href="#"><i class="fa fa-angle-left" /></a>
-                    </li>
-                    <li class="btc_shop_pagi"><a href="#">01</a></li>
-                    <li class="btc_shop_pagi"><a href="#">02</a></li>
-                    <li class="btc_third_pegi btc_shop_pagi"><a href="#">03</a></li>
-                    <li class="hidden-xs btc_shop_pagi"><a href="#">04</a></li>
-                    <li>
-                      <a href="#"><i class="fa fa-angle-right" /></a>
-                    </li>
-                  </ul>
+                          <div class="hs_kd_six_sec_input_wrapper i-message">
+                            <textarea
+                              rows="5"
+                              name="message"
+                              class="require"
+                              :placeholder="`Comments for question ${index + 1}`"
+                            ></textarea>
+                          </div>
+                        </div>
+                    </div>
+                      <button class="submit-btn" @click="submitAnswers">Submit Answers</button>
+                  </div>
                 </div>
               </div>
+            
             </div>
           </div>
         </div>
@@ -134,21 +208,26 @@
                 </div>
                 <div class="hs_blog_right_cate_list_cont_wrapper">
                   <ul>
-                    <li><a href="#">Day 1: Meeting the Inner Child</a></li>
-                    <li><a href="#">Day 2: Emotional Permission</a></li>
-                    <li><a href="#">Day 3: The Armor of Anger</a></li>
-                    <li><a href="#">Day 4: Seeking Approval</a></li>
-                    <li><a href="#">Day 5: The Fear of Exposure</a></li>
-                    <li><a href="#">Day 6: Trusting My Inner World</a></li>
-                    <li><a href="#">Day 7: The Wound as a Guide</a></li>
-                    <li><a href="#">Day 8: Building My Own Safety</a></li>
-                    <li><a href="#">Day 9: Releasing the Past</a></li>
-                    <li><a href="#">Day 10: Transforming Isolation</a></li>
-                    <li><a href="#">Final Thought</a></li>
+                    <li
+                      v-for="(plan, index) in journeyPlans"
+                      :key="plan.id"
+                    >
+                     <a
+                        href="#"
+                        :class="{ completed: plan.status === 'COMPLETED' }"
+                       :style="{ 
+                          border: String(plan.id) === String(planId) ? '2px solid #75429c' : 'none',
+                          padding: '6px 10px', 
+                          display: 'inline-block'
+                        }"
+                        @click.prevent="goToJourney(plan.id)"
+                      >
+                        Day {{ index + 1 }}: {{ plan.activity }}
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
-
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 visible-sm visible-xs">
                 <div class="pager_wrapper">
                   <ul class="pagination">
@@ -172,3 +251,68 @@
     </div>
   </div>
 </template>
+<style scope>
+.hs_blog_box1_img_wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.hs_blog_box1_img_wrapper img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Centered text */
+.overlay-heading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white !important;; 
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6); /* makes white text readable on bright images */
+}
+
+.overlay-heading h2 {
+  font-size: 18px;
+  letter-spacing: 3px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.overlay-heading h1 {
+  font-size: 42px;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+  margin: 0;
+}
+
+.overlay-heading p {
+  margin-top: 12px;
+  font-size: 16px;
+  font-style: italic;
+}
+.overlay-heading h2,
+.overlay-heading h1,
+.overlay-heading p {
+  color: white !important; 
+}
+.hs_blog_right_cate_list_cont_wrapper li.completed {
+  background-color: #75429c; /* Purple background */
+  color: white; /* Text inside li will be white */
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-bottom: 5px;
+}
+
+.hs_blog_right_cate_list_cont_wrapper li.completed a {
+  color: white !important; /* Make sure link stays white */
+}
+
+
+</style>

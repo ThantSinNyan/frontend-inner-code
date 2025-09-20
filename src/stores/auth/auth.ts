@@ -40,7 +40,7 @@ export const useAuthStore = defineStore('auth', () => {
   }) => {
     try {
       const { data } = await AxiosWithAuth.post('auth/register', payload)
-      return data // you can return a success message or user object from backend
+      return data 
     } catch (err) {
       const error = err as AxiosError<string>
       console.error('Registration failed:', error?.response?.data || err)
@@ -61,9 +61,9 @@ export const useAuthStore = defineStore('auth', () => {
       () => {
         logout()
         alert('Session expired. Please login again.')
-        window.location.href = '/register'
+        window.location.href = '/login'
       },
-      10 * 60 * 1000
+      30 * 60 * 1000
     )
   }
 

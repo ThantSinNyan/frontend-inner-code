@@ -215,11 +215,9 @@ watch(
                      <a
                         href="#"
                         :class="{ completed: plan.status === 'COMPLETED' }"
-                       :style="{ 
-                          border: String(plan.id) === String(planId) ? '2px solid #75429c' : 'none',
-                          padding: '6px 10px', 
-                          display: 'inline-block'
-                        }"
+                        :style="String(plan.id) === String(planId) 
+                        ? { border: '2px solid #75429c', padding: '6px 10px' }
+                        : {}"
                         @click.prevent="goToJourney(plan.id)"
                       >
                         Day {{ index + 1 }}: {{ plan.activity }}

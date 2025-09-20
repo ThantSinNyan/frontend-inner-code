@@ -66,7 +66,7 @@ function goToJourney(id) {
           </div>
         </div>
         <div v-for="(item, index) in personalInfoStore.dataList" :key="index">
-          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" @click="goToJourney(item.id)">
             <div class="hs_title_box_main_wrapper">
               <div class="hs_title_img_wrapper">
                 <img src="/images/content/healing-card.jpg" alt="totle_img" />
@@ -75,8 +75,8 @@ function goToJourney(id) {
                 </ul>
               </div>
               <div class="hs_title_img_cont_wrapper">
-                <h2><a href="#">{{ personalInfoStore.data.mainTitle }}</a></h2>
-                <p>  {{ item.description.split(' ').slice(0, 20).join(' ') }}...</p>
+                <h2><a href="#" @click="goToJourney(item.id)">{{ personalInfoStore.data.mainTitle }}</a></h2>
+                <p>  {{ item.description.split(' ').slice(0, 10).join(' ') }}...</p>
                 <h5>
                   <a href="javascript:void(0)" @click="goToJourney(item.id)">Go to Journey<i class="fa fa-long-arrow-right"></i></a>
                 </h5>

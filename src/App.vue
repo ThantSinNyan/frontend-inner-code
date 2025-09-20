@@ -1,13 +1,10 @@
 <template>
   <HelloWorld />
+  <CustomAlert ref="subscriptionAlert" />
 </template>
-<script>
-import HelloWorld from './views/MainView.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld,
-  },
-}
+<script setup>
+import { ref } from 'vue'
+import HelloWorld from './views/MainView.vue'
+import CustomAlert from '@/components/Alert/AccessDenineDetailPage.vue'
 </script>

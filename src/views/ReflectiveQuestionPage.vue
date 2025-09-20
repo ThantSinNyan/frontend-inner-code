@@ -35,6 +35,7 @@ function goToJourney() {
   router.push('/JourneyDetail/'+journeyPlanDay1)
 }
 
+
 </script>
 <template>
   <div class="hs_indx_title_main_wrapper">
@@ -95,7 +96,7 @@ function goToJourney() {
    </div>
   </div>
 </template>
-<style scope>
+<style scoped>
 .overlay {
   position: fixed;
   top: 0;

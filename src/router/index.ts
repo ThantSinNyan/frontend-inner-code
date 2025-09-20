@@ -1,8 +1,9 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth/auth'
+import { usePersonalInfoStore } from '@/stores/personalInfo'
+import { useUiStore } from '@/stores/ui'
 
-// Import the pages/components to be used as routes
 import HomePage from '@/views/HomePage.vue'
 import AboutPage from '@/views/AboutPage.vue'
 import ContactPage from '@/views/ContactPage.vue'
@@ -40,28 +41,52 @@ const routes = [
     path: '/journeyDetail/:id',
     name: 'journeyDetail',
     component: JourneyDetailPage,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, requiresSubscription: true }, 
   },
   { path: '/login', name: 'login', component: LoginPage },
   { path: '/register', name: 'register', component: CreateUserAccountPage },
-  { path: '/showAllJourney', name: 'showAllJourney', component: ShowAllJourneyPage,meta: { requiresAuth: true }, },
+  {
+    path: '/showAllJourney',
+    name: 'showAllJourney',
+    component: ShowAllJourneyPage,
+    meta: { requiresAuth: true },
+  },
 ]
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
+  const personalInfoStore = usePersonalInfoStore()
+  const uiStore = useUiStore()
+
   if (!authStore.token && to.meta.requiresAuth) {
     if (to.name !== 'login' && to.name !== 'register') {
-      alert('You are not authorized. Please login again.')
-      next({ name: 'login' })
-    } else {
-      next()
+      uiStore.openAlert({
+        title: 'Unauthorized',
+        message: 'You are not authorized. Please login again.',
+        confirmLabel: 'Go to Login',
+        onConfirmCallback: () => router.push({ name: 'login' }),
+      })
+      return next({ name: 'login' }) 
     }
-  } else {
-    next()
+    return next()
   }
+
+  if (to.meta.requiresSubscription && personalInfoStore.data?.subscription === 'NONE') {
+    uiStore.openAlert({
+      title: 'Access Required',
+      message: 'Please complete the reflective questions first to unlock your healing plan.',
+      confirmLabel: 'Go to Home',
+      onConfirmCallback: () => router.push({ name: 'Home' }),
+    })
+    return next({ name: 'showAllJourney' }) 
+  }
+
+  next()
 })
 
 export default router

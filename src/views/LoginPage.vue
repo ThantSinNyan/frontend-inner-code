@@ -2,6 +2,8 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth/auth'
+import { useUiStore } from '@/stores/ui'
+const uiStore = useUiStore()
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -15,13 +17,26 @@ const onLogin = async () => {
   try {
     const success = await authStore.login(form.email, form.password)
     if (success) {
-      alert('Login successful!')
+      uiStore.openAlert({
+        title: 'Welcome!',
+        message: 'Login successful. Redirecting to home page...',
+        confirmLabel: 'OK',
+        onConfirmCallback: () => router.push('/'), 
+      })
       router.push('/')
     } else {
-      alert('Invalid email or password.')
+      uiStore.openAlert({
+        title: 'Login Failed',
+        message: 'Invalid email or password. Please try again.',
+        confirmLabel: 'Try Again',
+      })
     }
   } catch (error) {
-    alert('Login failed. Please try again.')
+    uiStore.openAlert({
+      title: 'Error',
+      message: 'Login failed. Please try again later.',
+      confirmLabel: 'Close',
+    })
   }
 }
 </script>

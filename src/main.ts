@@ -6,6 +6,7 @@ import router from './router'
 import i18n from './i18n'
 import '@iconify/iconify'
 
+
 const app = createApp(App)
 const pinia = createPinia()
 app.use(pinia)

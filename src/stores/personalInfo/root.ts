@@ -4,6 +4,7 @@ import { ref, watch } from 'vue'
 export const useRootStore = defineStore('root', {
   state: () => ({
     showErrorModal: false,
+    successModal: false,
     detailModal: {
       title: '',
       message: '',
@@ -15,6 +16,9 @@ export const useRootStore = defineStore('root', {
     },
     setErrorModal(show: boolean) {
       this.showErrorModal = show
+    },
+     setSuccessModal(show: boolean) {
+      this.successModal = show
     },
   },
 })

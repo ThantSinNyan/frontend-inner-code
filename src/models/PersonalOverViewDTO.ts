@@ -1,4 +1,5 @@
 import type { HealingPlanDTO } from './HealingPlanDTO'
+import type {ReflectiveQuestionDTO} from './ReflectiveQuestionDto'
 export interface PersonalOverViewDTO {
   id: string
   sign: string
@@ -11,5 +12,6 @@ export interface PersonalOverViewDTO {
   woundPoints: string[]
   patternsConnectedToThisWound: string[]
   healingBenefits: string[]
+  reflectiveQuestions: ReflectiveQuestionDTO[]
   healingPlans: HealingPlanDTO[]
 }

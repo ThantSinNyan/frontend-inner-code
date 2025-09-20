@@ -8,6 +8,7 @@ import type { PersonalOverViewDTO } from '@/models/PersonalOverViewDTO'
 const personalInfoUrl = 'users/generate-personal-inside-data-overview'
 const personalInfosByUserId = 'users/getHealingJourneyByUserId'
 const personalInfoById = 'users/get-personal-inside-data-overview'
+const saveReflectiveAnswersUrl = 'users/reflective-answers'
 
 export const actions = {
   async loadAndSavePersonalInfo(formData: PersonalFormDTO) {
@@ -53,6 +54,20 @@ export const actions = {
       rootStore.setDetailModal('notification.title.error', errorMessage)
       rootStore.setErrorModal(true)
       state.dataList = []
+    }
+  },
+  async saveReflectiveAnswers(answers: Record<number, string>) {
+    const rootStore = useRootStore()
+    try {
+      await AxiosWithAuth.post(saveReflectiveAnswersUrl, { answers })
+      rootStore.setDetailModal('notification.title.success', 'Answers submitted successfully!')
+      rootStore.setSuccessModal(true)
+    } catch (err) {
+      const error = err as AxiosError<string>
+      const errorMessage =
+        error?.response?.data || 'Failed to submit reflective answers.'
+      rootStore.setDetailModal('notification.title.error', errorMessage)
+      rootStore.setErrorModal(true)
     }
   },
   clearData() {

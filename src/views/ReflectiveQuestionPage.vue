@@ -1,11 +1,39 @@
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
-
+import { usePersonalInfoStore } from '@/stores/personalInfo'
+import { ref } from 'vue'
+const personalInfoStore = usePersonalInfoStore()
+const reflectiveQuestions=personalInfoStore.data.reflectiveQuestions
+const journeyPlanDay1=personalInfoStore.data.healingPlans[0].id
 const router = useRouter()
-
-function goToJourney() {
-  router.push('/JourneyDetail')
+const answers = ref<Record<number, string>>({})
+const showSuccessAlert = ref(false)
+const answerMap: Record<string, string> = {
+  'Strongly Disagree': 'STRONGLY_DISAGREE',
+  'Disagree': 'DISAGREE',
+  'Neutral': 'NEUTRAL',
+  'Agree': 'AGREE',
+  'Strongly Agree': 'STRONGLY_AGREE'
 }
+function selectAnswer(questionId: number, value: string) {
+  answers.value[questionId] = value
+}
+async function submitAnswers() {
+    window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+  const numericAnswers: Record<string, string> = {}
+  for (const [id, text] of Object.entries(answers.value)) {
+    numericAnswers[id] = answerMap[text] ?? 'NOT_ANSWER'
+  }
+  await personalInfoStore.saveReflectiveAnswers(numericAnswers)
+  showSuccessAlert.value = true
+}
+function goToJourney() {
+  router.push('/JourneyDetail/'+journeyPlanDay1)
+}
+
 </script>
 <template>
   <div class="hs_indx_title_main_wrapper">
@@ -31,161 +59,98 @@ function goToJourney() {
 
   <div class="survey-container">
     <h2>How Did This Reading Resonate With You?</h2>
+    <div
+        v-for="(question, index) in reflectiveQuestions"
+        :key="question.id"
+        class="question-card"
+      >
 
-    <!-- Q1 -->
-    <div class="question-card">
-      <p>
-        1. Do you feel safe and emotionally supported when you think about your family or childhood
-        home?
-      </p>
+       <p>{{ index + 1 }}. {{ question.question }}</p>
       <div class="options">
-        <label class="option"
-          ><input type="radio" name="q1" value="Strongly Agree" /><span class="custom-radio"></span
-          >Strongly Agree</label
+       <label
+          v-for="option in ['Strongly Agree', 'Agree', 'Neutral', 'Disagree', 'Strongly Disagree']"
+          :key="option"
+          class="option"
         >
-        <label class="option"
-          ><input type="radio" name="q1" value="Agree" /><span class="custom-radio"></span
-          >Agree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q1" value="Neutral" /><span class="custom-radio"></span
-          >Neutral</label
-        >
-        <label class="option"
-          ><input type="radio" name="q1" value="Disagree" /><span class="custom-radio"></span
-          >Disagree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q1" value="Strongly Disagree" /><span
-            class="custom-radio"
-          ></span
-          >Strongly Disagree</label
-        >
+         <input
+            type="radio"
+            :name="'q' + question.id"
+            :value="option"
+            :checked="answers[question.id] === option"
+            @change="selectAnswer(question.id, option)"
+          />
+          <span class="custom-radio"></span>
+          {{ option }}
+        </label>
       </div>
     </div>
-
-    <!-- Q2 -->
-    <div class="question-card">
-      <p>2. Do you feel a sense of purpose in your daily life?</p>
-      <div class="options">
-        <label class="option"
-          ><input type="radio" name="q2" value="Strongly Agree" /><span class="custom-radio"></span
-          >Strongly Agree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q2" value="Agree" /><span class="custom-radio"></span
-          >Agree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q2" value="Neutral" /><span class="custom-radio"></span
-          >Neutral</label
-        >
-        <label class="option"
-          ><input type="radio" name="q2" value="Disagree" /><span class="custom-radio"></span
-          >Disagree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q2" value="Strongly Disagree" /><span
-            class="custom-radio"
-          ></span
-          >Strongly Disagree</label
-        >
-      </div>
+   <button class="submit-btn" @click="submitAnswers">Submit Answers</button>
+   <div v-if="showSuccessAlert" class="overlay">
+    <div class="custom-alert">
+      <strong>✅ Thank you for your answer!</strong>
+      <p>You will now get a free trial to use your healing journey.</p>
+      <button @click="goToJourney" class="close-btn">OK</button>
     </div>
-
-    <!-- Q3 -->
-    <div class="question-card">
-      <p>3. Do you feel connected to your friends and social circle?</p>
-      <div class="options">
-        <label class="option"
-          ><input type="radio" name="q3" value="Strongly Agree" /><span class="custom-radio"></span
-          >Strongly Agree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q3" value="Agree" /><span class="custom-radio"></span
-          >Agree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q3" value="Neutral" /><span class="custom-radio"></span
-          >Neutral</label
-        >
-        <label class="option"
-          ><input type="radio" name="q3" value="Disagree" /><span class="custom-radio"></span
-          >Disagree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q3" value="Strongly Disagree" /><span
-            class="custom-radio"
-          ></span
-          >Strongly Disagree</label
-        >
-      </div>
-    </div>
-
-    <!-- Q4 -->
-    <div class="question-card">
-      <p>4. Do you feel you can manage stress in a healthy way?</p>
-      <div class="options">
-        <label class="option"
-          ><input type="radio" name="q4" value="Strongly Agree" /><span class="custom-radio"></span
-          >Strongly Agree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q4" value="Agree" /><span class="custom-radio"></span
-          >Agree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q4" value="Neutral" /><span class="custom-radio"></span
-          >Neutral</label
-        >
-        <label class="option"
-          ><input type="radio" name="q4" value="Disagree" /><span class="custom-radio"></span
-          >Disagree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q4" value="Strongly Disagree" /><span
-            class="custom-radio"
-          ></span
-          >Strongly Disagree</label
-        >
-      </div>
-    </div>
-
-    <!-- Q5 -->
-    <div class="question-card">
-      <p>5. Do you feel hopeful and optimistic about your future?</p>
-      <div class="options">
-        <label class="option"
-          ><input type="radio" name="q5" value="Strongly Agree" /><span class="custom-radio"></span
-          >Strongly Agree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q5" value="Agree" /><span class="custom-radio"></span
-          >Agree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q5" value="Neutral" /><span class="custom-radio"></span
-          >Neutral</label
-        >
-        <label class="option"
-          ><input type="radio" name="q5" value="Disagree" /><span class="custom-radio"></span
-          >Disagree</label
-        >
-        <label class="option"
-          ><input type="radio" name="q5" value="Strongly Disagree" /><span
-            class="custom-radio"
-          ></span
-          >Strongly Disagree</label
-        >
-      </div>
-    </div>
-    <button class="submit-btn" @click="goToJourney">Submit Answers</button>
+   </div>
   </div>
 </template>
-<style>
+<style scope>
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Centered box */
+.custom-alert {
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+  color: #389e0d;
+  padding: 20px 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.custom-alert p {
+  margin: 8px 0 16px;
+  font-size: 16px;
+}
+
+.close-btn {
+  background: #52c41a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+  background: #389e0d;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 .survey-container {
   max-width: 900px;
-  margin: 400px auto 0; /* was 20px, now 40px */
+  margin: 400px auto 0;
   padding: 30px;
   font-family: 'Segoe UI', Roboto, sans-serif;
 }

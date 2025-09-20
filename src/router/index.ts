@@ -44,7 +44,7 @@ const routes = [
   },
   { path: '/login', name: 'login', component: LoginPage },
   { path: '/register', name: 'register', component: CreateUserAccountPage },
-  { path: '/showAllJourney', name: 'showAllJourney', component: ShowAllJourneyPage },
+  { path: '/showAllJourney', name: 'showAllJourney', component: ShowAllJourneyPage,meta: { requiresAuth: true }, },
 ]
 const router = createRouter({
   history: createWebHistory(),
@@ -54,6 +54,7 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   if (!authStore.token && to.meta.requiresAuth) {
     if (to.name !== 'login' && to.name !== 'register') {
+      alert('You are not authorized. Please login again.')
       next({ name: 'login' })
     } else {
       next()

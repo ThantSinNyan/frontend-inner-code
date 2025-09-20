@@ -12,8 +12,7 @@ import myJourneyOverview from '@/locales/my/my_journey_overview.json'
 const i18n = createI18n({
   legacy: false,
   globalInjection: true,
-  locale: localStorage.getItem('language') || 'en', // default from storage
-  fallbackLocale: 'en',
+  locale: localStorage.getItem('language') || 'en', 
   messages: {
     en: {
       ...enBase,

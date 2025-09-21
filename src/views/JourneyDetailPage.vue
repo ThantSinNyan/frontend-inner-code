@@ -347,7 +347,7 @@ const imageMap: Record<string, string> = {
 }
 
 .overlay-heading h1 {
-  font-size: 42px;
+  font-size: 27px;
   font-weight: bold;
   font-family: 'Georgia', serif;
   margin: 0;

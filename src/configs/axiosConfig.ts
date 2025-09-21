@@ -1,7 +1,8 @@
 import axios from 'axios'
 import router from '@/router'
 import { useAuthStore } from '@/stores/auth/auth'
-
+import { useUiStore } from '@/stores/ui'
+const uiStore = useUiStore()
 const AxiosWithAuth = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: {
@@ -37,10 +38,22 @@ AxiosWithAuth.interceptors.response.use(
           return AxiosWithAuth(error.config)
         } catch (err) {
           authStore.logout()
+           uiStore.openAlert({
+            title: 'Session Timeout',
+            message: 'Please login again...',
+            confirmLabel: 'Go to Login',
+            onConfirmCallback: () => router.push({ name: 'login' }),
+          })
           router.push({ name: 'login' })
         }
       } else {
         authStore.logout()
+         uiStore.openAlert({
+            title: 'Session Timeout',
+            message: 'Please login again...',
+            confirmLabel: 'Go to Login',
+            onConfirmCallback: () => router.push({ name: 'login' }),
+          })
         router.push({ name: 'login' })
       }
     }

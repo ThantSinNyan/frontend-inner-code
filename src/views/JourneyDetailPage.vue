@@ -36,6 +36,55 @@ watch(
     )
   }
 )
+
+const videoMap: Record<string, string> = {
+  "Meeting Your Inner Healer": "https://www.youtube.com/embed/AmK_clZ579M",
+  "Releasing the Old Story": "https://www.youtube.com/embed/8Oi3iUJkwFM",
+  "Inner Child Connection & Comfort": "https://www.youtube.com/embed/9fvN_Yt9kgo",
+  "Strength from the Scar": "https://www.youtube.com/embed/7g96Zq9NSqo",
+  "Heart-Centered Self-Compassion": "https://www.youtube.com/embed/vtOAnC73xtk",
+  "Grounding & Safety in the Body": "https://www.youtube.com/embed/WjCHRliwZjY",
+  "Embracing the Whole Self": "https://www.youtube.com/embed/6jiOQT4P9Cc",
+  "Healing Ancestral Roots": "https://www.youtube.com/embed/CmlsWfU-UTc",
+  "Forgiveness Practice": "https://www.youtube.com/embed/vtOAnC73xtk",
+  "Sacred Boundaries": "https://www.youtube.com/embed/8Oi3iUJkwFM",
+  "Gratitude Presence": "https://www.youtube.com/embed/WMzsdMsnxN4",
+  "Body as Sanctuary": "https://www.youtube.com/embed/7g96Zq9NSqo",
+  "Breath of Release": "https://www.youtube.com/embed/iFqC2DfTOys",
+  "Visioning Your Higher Path": "https://www.youtube.com/embed/WMzsdMsnxN4",
+  "Compassion for Others": "https://www.youtube.com/embed/-GltqLKq5-g",
+  "Shadow Integration": "https://www.youtube.com/embed/6jiOQT4P9Cc",
+  "Stillness in Spirit": "https://www.youtube.com/embed/ya4nu7vDqH4",
+}
+
+const imageMap: Record<string, string> = {
+  "Meeting Your Inner Healer": "Meeting_Your_Inner_Healer.jpg",
+  "Releasing the Old Story": "Releasing_the_Old_Story.png",
+  "Inner Child Connection & Comfort": "Inner_Child_Connection.png",
+  "Strength from the Scar": "Strength_from_the_Scar.png",
+  "Heart-Centered Self-Compassion": "Heart_Centered_Self_Compassion.png",
+  "Grounding & Safety in the Body": "Grounding_Safety_in_the_Body.png",
+  "Embracing the Whole Self": "Embracing_the_Whole_Self.png",
+  "Healing Ancestral Roots": "Healing_Ancestral_Roots.png",
+  "Forgiveness Practice": "Forgiveness_Practice.png",
+  "Sacred Boundaries": "Sacred_Boundaries.png",
+  "Gratitude Presence": "Gratitude_Presence.png",
+  "Body as Sanctuary": "Body_as_Sanctuary.png",
+  "Breath of Release": "Breath_of_Release.png",
+  "Visioning Your Higher Path": "Visioning_Your_Higher_Path.png",
+  "Compassion for Others": "Compassion_for_Others.png",
+  "Shadow Integration": "Shadow_Integration.png",
+  "Stillness in Spirit": "Stillness_in_Spirit.png",
+}
+
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  })
+}
+
 </script>
 
 <template>
@@ -68,7 +117,11 @@ watch(
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="hs_blog_box1_main_wrapper">
                   <div class="hs_blog_box1_img_wrapper">
-                    <img src="/images/content/day/default.png" alt="blog_img" height="300" />
+                   <img
+                      :src="`/images/content/day/${imageMap[selectedPlan?.meditation] || 'default.png'}`"
+                      alt="blog_img"
+                      height="300"
+                    />
                      <div class="overlay-heading">
                         <h2>The Healing Power of your mind</h2>
                         <h1>You are poweful more than you think</h1>
@@ -104,7 +157,12 @@ watch(
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="hs_blog_box1_main_wrapper hs_blog_box2_main_wrapper">
                   <div class="hs_blog_box1_img_wrapper">
-                    <iframe src="https://www.youtube.com/embed/uTN29kj7e-w?si=6SRsb7FLkVTDnvNR" />
+                   <iframe
+                        v-if="videoMap[selectedPlan?.meditation]"
+                        :src="videoMap[selectedPlan.meditation]"
+                        frameborder="0"
+                        allowfullscreen
+                      />
                     <ul>
                       <li>29 Jul, 2020</li>
                     </ul>
@@ -212,12 +270,12 @@ watch(
                       v-for="(plan, index) in journeyPlans"
                       :key="plan.id"
                     >
-                     <a
+                      <a
                         href="#"
-                        :class="{ completed: plan.status === 'COMPLETED' }"
-                        :style="String(plan.id) === String(planId) 
-                        ? { border: '2px solid #75429c', padding: '6px 10px' }
-                        : {}"
+                        :class="[
+                          { completed: plan.status === 'COMPLETED' },
+                          String(plan.id) === String(planId) ? 'active-plan' : ''
+                        ]"
                         @click.prevent="goToJourney(plan.id)"
                       >
                         Day {{ index + 1 }}: {{ plan.activity }}
@@ -250,6 +308,10 @@ watch(
   </div>
 </template>
 <style scope>
+.hs_blog_right_cate_list_cont_wrapper li a.active-plan {
+  border: 2px solid #75429c;
+  color: #75429c;
+}
 .hs_blog_box1_img_wrapper {
   position: relative;
   display: inline-block;

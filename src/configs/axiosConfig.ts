@@ -2,7 +2,6 @@ import axios from 'axios'
 import router from '@/router'
 import { useAuthStore } from '@/stores/auth/auth'
 import { useUiStore } from '@/stores/ui'
-const uiStore = useUiStore()
 const AxiosWithAuth = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: {
@@ -23,6 +22,7 @@ AxiosWithAuth.interceptors.request.use(
 AxiosWithAuth.interceptors.response.use(
   (res) => res,
   async (error) => {
+    const uiStore = useUiStore()
     if (error.response?.status === 401) {
       const authStore = useAuthStore()
       const refreshToken = localStorage.getItem('refresh_token')

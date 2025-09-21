@@ -12,14 +12,20 @@ const router = useRouter()
 const planId = ref(route.params.id)
 
 const isCompleted = ref(false)
+const isLoading = ref(false)
 
 function toggleStatus() {
   isCompleted.value = !isCompleted.value
 }
 
 function goToJourney(id: number | string) {
-  planId.value = String(id) 
-  router.push(`/JourneyDetail/${id}`)
+  isLoading.value = true         
+  planId.value = String(id)     
+
+  setTimeout(() => {
+    router.push(`/JourneyDetail/${id}`)
+    isLoading.value = false      
+  }, 500) 
 }
 
 
@@ -60,7 +66,7 @@ const videoMap: Record<string, string> = {
 const imageMap: Record<string, string> = {
   "Meeting Your Inner Healer": "Meeting_Your_Inner_Healer.jpg",
   "Releasing the Old Story": "Releasing_the_Old_Story.png",
-  "Inner Child Connection & Comfort": "Inner_Child_Connection.png",
+  "Inner Child Connection & Comfort": "Inner_child_connections_and_Comfort.png",
   "Strength from the Scar": "Strength_from_the_Scar.png",
   "Heart-Centered Self-Compassion": "Heart_Centered_Self_Compassion.png",
   "Grounding & Safety in the Body": "Grounding_Safety_in_the_Body.png",
@@ -75,14 +81,6 @@ const imageMap: Record<string, string> = {
   "Compassion for Others": "Compassion_for_Others.png",
   "Shadow Integration": "Shadow_Integration.png",
   "Stillness in Spirit": "Stillness_in_Spirit.png",
-}
-
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  })
 }
 
 </script>
@@ -124,7 +122,7 @@ function formatDate(dateString: string) {
                     />
                      <div class="overlay-heading">
                         <h2>The Healing Power of your mind</h2>
-                        <h1>You are poweful more than you think</h1>
+                        <h1>{{selectedPlan.affirmation}}</h1>
                         <p>by The Inner Code</p>
                     </div>
                     <ul>
@@ -306,6 +304,9 @@ function formatDate(dateString: string) {
       </div>
     </div>
   </div>
+  <div v-if="isLoading" class="loading-overlay">
+  <div class="loading-spinner"></div>
+</div>
 </template>
 <style scope>
 .hs_blog_right_cate_list_cont_wrapper li a.active-plan {
@@ -363,16 +364,43 @@ function formatDate(dateString: string) {
   color: white !important; 
 }
 .hs_blog_right_cate_list_cont_wrapper li.completed {
-  background-color: #75429c; /* Purple background */
-  color: white; /* Text inside li will be white */
+  background-color: #75429c; 
+  color: white;
   border-radius: 8px;
   padding: 6px 10px;
   margin-bottom: 5px;
 }
 
 .hs_blog_right_cate_list_cont_wrapper li.completed a {
-  color: white !important; /* Make sure link stays white */
+  color: white !important; 
 }
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  border: 6px solid rgba(117, 66, 156, 0.2); 
+  border-top: 6px solid #75429c; 
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 
 
 </style>

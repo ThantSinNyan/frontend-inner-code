@@ -5814,7 +5814,7 @@ ul {
   -o-transition: all 0.5s;
   -ms-transition: all 0.5s;
   -moz-transition: all 0.5s;
-  transition: all 0.5s;
+  transition: all 0.3s ease;
 }
 .hs_blog_right_cate_list_cont_wrapper a.completed {
   background-color: rgba(146, 40, 203, 0.5); 

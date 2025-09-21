@@ -1200,7 +1200,7 @@ function closeAlert() {
                       </div>
                     </div>
                   </div>
-             
+                  
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <div class="hs_kd_six_sec_btn">
                         <ul> 
@@ -1224,7 +1224,7 @@ function closeAlert() {
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="hs_kd_right_first_sec_wrapper">
                   <div class="hs_kd_right_first_sec_heading">
-                    <h2>Healing Journey</h2>
+                    <h2>Healing Journey</h2>{{ personOverView.subscription }}
                   </div>
                   <div class="hs_blog_right_cate_list_cont_wrapper">
                     <ul>

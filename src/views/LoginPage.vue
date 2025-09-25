@@ -68,7 +68,7 @@ const onLogin = async () => {
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="hs_about_left_img_wrapper">
-            <img src="/images/content/about_img_1.png" alt="login_img" />
+            <img src="/images/content/healing-card.jpg" alt="login_img" />
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

@@ -8,6 +8,7 @@ const router = useRouter()
 const personalInfoStore = usePersonalInfoStore()
 const personOverView = usePersonalInfoStore().data
 onMounted(async () => {
+  console.log('start loadPersonalInfos -->')
   await personalInfoStore.loadPersonalInfos({
     userId: authStore.user.id,
     birthDate: '1999-07-01',
@@ -15,6 +16,7 @@ onMounted(async () => {
     birthPlace: 'Myanmar, Dawei',
     language: 'English',
   })
+   console.log('stop loadPersonalInfos -->')
 })
 
 function goToJourney(id) {
@@ -76,7 +78,7 @@ function goToJourney(id) {
               </div>
               <div class="hs_title_img_cont_wrapper">
                 <h2><a href="#" @click="goToJourney(item.id)">{{ personalInfoStore.data.mainTitle }}</a></h2>
-                <p>  {{ item.description.split(' ').slice(0, 10).join(' ') }}...</p>
+                <!-- <p>   {{ item.description?.split(' ').slice(0, 10).join(' ') || '' }}...</p> -->
                 <h5>
                   <a href="javascript:void(0)" @click="goToJourney(item.id)">Go to Journey<i class="fa fa-long-arrow-right"></i></a>
                 </h5>

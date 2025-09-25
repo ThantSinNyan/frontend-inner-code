@@ -7,5 +7,6 @@ export interface HealingPlanDTO {
   meditation: string
   status: string
   affirmation: string
+  createdAt: string
   prompts: PromptDTO[]
 }

@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router'
+import { usePromptStore } from '@/stores/prompt'
 import { usePersonalInfoStore } from '@/stores/personalInfo'
+import { useMeditationStore } from '@/stores/meditation'
 import { ref, watch } from 'vue'
-
+import { formatDate } from '@/utils/dateUtils'
+import type { PromptDTO } from '@/models/PromptDTO'
+import CustomAlert from '@/components/Alert/CustomAlert.vue'
+import type { MeditationMediaDTO } from '@/models/MeditationMediaDTO'
+const showSuccessAlert = ref(false)
 const personalInfoStore = usePersonalInfoStore()
+const meditationStore = useMeditationStore()
 const journeyPlans = personalInfoStore.data.healingPlans
 
 const route = useRoute()
@@ -42,6 +49,49 @@ watch(
     )
   }
 )
+
+
+const promptStore = usePromptStore()
+
+async function submitAnswers() {
+  if (!selectedPlan.value) return
+
+  const payload: PromptDTO[] = selectedPlan.value.prompts.map((p) => ({
+    id: p.id,
+    question: p.question,
+    answer: p.answer,
+    status: 'COMPLETED'
+  }))
+
+  await promptStore.savePromptAnswers(payload)
+  showSuccessAlert.value = true
+  isCompleted.value = true
+  await personalInfoStore.loadPersonalInfoById({
+    id: personalInfoStore.data.id,
+    userId: '',
+    nameOne: '',
+    birthDate: '',
+    birthTime: '',
+    birthPlace: '',
+    language: ''
+  })
+}
+
+async function markMeditationComplete() {
+  if (!selectedPlan.value) return
+  const meditationMedia: MeditationMediaDTO = {
+    id: 0,
+    planId: selectedPlan.value.id,
+    status: 'COMPLETED',
+    videoLink: selectedPlan.value.meditation, 
+    imgLink: '',
+    name: selectedPlan.value.activity,
+    description: selectedPlan.value.overview,
+  }
+  await meditationStore.saveMeditationMedia(meditationMedia)
+  selectedPlan.value.status = 'COMPLETED'
+}
+
 
 const videoMap: Record<string, string> = {
   "Meeting Your Inner Healer": "https://www.youtube.com/embed/AmK_clZ579M",
@@ -123,17 +173,17 @@ const imageMap: Record<string, string> = {
                      <div class="overlay-heading">
                         <h2>The Healing Power of your mind</h2>
                         <h1>{{selectedPlan.affirmation}}</h1>
-                        <p>by The Inner Code</p>
+                        <p>by The InnerCode</p>
                     </div>
                     <ul>
-                      <li>29 Jul, 2020</li>
+                      <li>{{ formatDate(selectedPlan.createdAt) }}</li>
                     </ul>
                   </div>
                   <div class="hs_blog_box1_cont_main_wrapper">
                     <div class="hs_lest_news_meta_wrapper">
                       <ul>
                         <li>
-                          <a href="#">By - Thazin Aung</a>
+                          <a href="#">By - TheInnerCode</a>
                         </li>
                       </ul>
                     </div>
@@ -162,14 +212,14 @@ const imageMap: Record<string, string> = {
                         allowfullscreen
                       />
                     <ul>
-                      <li>29 Jul, 2020</li>
+                      <li>{{ formatDate(selectedPlan.createdAt) }}</li>
                     </ul>
                   </div>
                   <div class="hs_blog_box1_cont_main_wrapper">
                     <div class="hs_lest_news_meta_wrapper">
                       <ul>
                         <li>
-                          <a href="#">By - Admin</a>
+                          <a href="#">By - TheInnerCode</a>
                         </li>
                         <li>
                           <a href="#">256 Comments</a>
@@ -189,11 +239,12 @@ const imageMap: Record<string, string> = {
                       </p>
                       <button 
                         class="btn-purple-small"
-                        :class="{ completed: isCompleted }"
-                        @click="toggleStatus"
+                        :class="{ completed: selectedPlan?.status === 'COMPLETED' }"
+                        @click="markMeditationComplete"
                       >
-                        {{ isCompleted ? 'Complete' : 'In Progress' }}
+                        {{ selectedPlan?.status === 'COMPLETED' ? 'Completed' : 'Mark as Complete' }}
                       </button>
+
                     </div>
                   </div>
                 </div>
@@ -205,13 +256,13 @@ const imageMap: Record<string, string> = {
                     <div class="hs_lest_news_meta_wrapper">
                       <ul>
                         <li>
-                          <a href="#">By - Admin</a>
+                          <a href="#">By - TheInnerCode</a>
                         </li>
                         <li>
                           <a href="#">Journaling Prompt Section</a>
                         </li>
                         <li>
-                           <button 
+                          <button 
                               class="btn-purple-icon"
                               :class="{ completed: isCompleted }"
                               @click="toggleStatus"
@@ -222,7 +273,7 @@ const imageMap: Record<string, string> = {
                       </ul>
                     </div>
                     <div class="hs_blog_cont_heading_wrapper">
-                      <div 
+                    <div 
                           v-for="(prompt, index) in selectedPlan.prompts" 
                           :key="prompt.id || index" 
                           class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
@@ -234,6 +285,7 @@ const imageMap: Record<string, string> = {
                           <div class="hs_kd_six_sec_input_wrapper i-message">
                             <textarea
                               rows="5"
+                              v-model="prompt.answer" 
                               name="message"
                               class="require"
                               :placeholder="`Comments for question ${index + 1}`"
@@ -268,20 +320,29 @@ const imageMap: Record<string, string> = {
                       v-for="(plan, index) in journeyPlans"
                       :key="plan.id"
                     >
-                      <a
-                        href="#"
-                        :class="[
-                          { completed: plan.status === 'COMPLETED' },
-                          String(plan.id) === String(planId) ? 'active-plan' : ''
-                        ]"
-                        @click.prevent="goToJourney(plan.id)"
-                      >
-                        Day {{ index + 1 }}: {{ plan.activity }}
-                      </a>
+                  <a
+                    href="#"
+                    class="journey-link"
+                    :class="{
+                      completed: plan.status === 'COMPLETED',
+                      'active-plan': String(plan.id) === String(planId)
+                    }"
+                    @click.prevent="goToJourney(plan.id)"
+                  >
+                    Day {{ index + 1 }}: {{ plan.activity }}
+                  </a>
                     </li>
                   </ul>
                 </div>
               </div>
+              <CustomAlert
+                :visible="showSuccessAlert"
+                type="success"
+                title="🎉 Congratulations!"
+                message="You have successfully submitted your reflective answers. Your healing journey prompt activity is complete."
+                button-text="OK"
+                @confirm="showSuccessAlert = false"
+              />
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 visible-sm visible-xs">
                 <div class="pager_wrapper">
                   <ul class="pagination">
@@ -362,29 +423,6 @@ const imageMap: Record<string, string> = {
 .overlay-heading h1,
 .overlay-heading p {
   color: white !important; 
-}
-.hs_blog_right_cate_list_cont_wrapper li.completed {
-  background-color: #75429c; 
-  color: white;
-  border-radius: 8px;
-  padding: 6px 10px;
-  margin-bottom: 5px;
-}
-
-.hs_blog_right_cate_list_cont_wrapper li.completed a {
-  color: white !important; 
-}
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
 }
 
 .loading-spinner {

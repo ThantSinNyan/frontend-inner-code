@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter} from 'vue-router'
 import { usePersonalInfoStore } from '@/stores/personalInfo'
+import CustomAlert from '@/components/Alert/CustomAlert.vue'
 import { ref } from 'vue'
 const personalInfoStore = usePersonalInfoStore()
 const reflectiveQuestions=personalInfoStore.data.reflectiveQuestionDTOs
@@ -31,11 +32,10 @@ async function submitAnswers() {
   await personalInfoStore.saveReflectiveAnswers(numericAnswers)
   showSuccessAlert.value = true
 }
-function goToJourney() {
+function closeAlert() {
+  showSuccessAlert.value = false
   router.push('/JourneyDetail/'+journeyPlanDay1)
 }
-
-
 </script>
 <template>
   <div class="hs_indx_title_main_wrapper">
@@ -87,68 +87,17 @@ function goToJourney() {
       </div>
     </div>
    <button class="submit-btn" @click="submitAnswers">Submit Answers</button>
-   <div v-if="showSuccessAlert" class="overlay">
-    <div class="custom-alert">
-      <strong>✅ Thank you for your answer!</strong>
-      <p>You will now get a free trial to use your healing journey.</p>
-      <button @click="goToJourney" class="close-btn">OK</button>
-    </div>
-   </div>
+     <CustomAlert
+        :visible="showSuccessAlert"
+        type="success"
+        title="✅ Thank you for your answer!"
+        message="You will now get a free trial to use your healing journey."
+        button-text="OK"
+        :onConfirm="closeAlert"
+      />
   </div>
 </template>
 <style scoped>
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-/* Centered box */
-.custom-alert {
-  background: #f6ffed;
-  border: 1px solid #b7eb8f;
-  color: #389e0d;
-  padding: 20px 30px;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.custom-alert p {
-  margin: 8px 0 16px;
-  font-size: 16px;
-}
-
-.close-btn {
-  background: #52c41a;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.close-btn:hover {
-  background: #389e0d;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
 
 .survey-container {
   max-width: 900px;

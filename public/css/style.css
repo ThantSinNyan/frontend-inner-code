@@ -5819,9 +5819,8 @@ ul {
 .hs_blog_right_cate_list_cont_wrapper a.completed {
   background-color: rgba(146, 40, 203, 0.5); 
   color: rgb(0, 0, 0) !important;
-  padding: 6px 10px;
-  display: inline-block; 
-  text-decoration: none;
+  font-weight: bold;       /* optional: make text stand out */
+  text-decoration: none;   /* optional: keep clean look */
 }
 
 

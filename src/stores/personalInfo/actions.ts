@@ -45,12 +45,14 @@ export const actions = {
     const state = this as PersonalInfoStore
     const rootStore = useRootStore()
     try {
+      console.log("📡 Calling loadPersonalInfos with:", formData)
       const { data } = await AxiosWithAuth.post(personalInfosByUserId, formData)
+      console.log("✅ API Response received:", data)
       state.dataList = data as PersonalOverViewDTO[]
     } catch (err) {
       const error = err as AxiosError<string>
-      const errorMessage =
-        error?.response?.data || 'Failed to load personal information.'
+      console.error("❌ API error:", error)
+      const errorMessage = error?.response?.data || 'Failed to load personal information.'
       rootStore.setDetailModal('notification.title.error', errorMessage)
       rootStore.setErrorModal(true)
       state.dataList = []

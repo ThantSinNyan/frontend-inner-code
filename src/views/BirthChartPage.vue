@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { usePersonalInfoStore } from '@/stores/personalInfo'
+import CustomAlert from '@/components/Alert/CustomAlert.vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 import { onMounted,reactive,computed,ref } from 'vue'
@@ -1247,71 +1248,16 @@ function closeAlert() {
             </div>
           </div>
         </div>
-         <div v-if="showSuccessAlert" class="overlay">
-            <div class="custom-alert">
-              <strong>Access to Healing Plan</strong>
-              <p>
-                To unlock your healing plan, please take a moment to complete our reflective
-                questions. Your honest answers will help us personalize your journey.
-              </p>
-              <button @click="closeAlert" class="close-btn">OK</button>
-            </div>
-           </div>
+           <CustomAlert
+              :visible="showSuccessAlert"
+              type="warning"
+              title="⚠ Access to Healing Plan"
+              message="To unlock your healing plan, please take a moment to complete our reflective
+                      questions. Your honest answers will help us personalize your journey."
+              button-text="OK"
+              @confirm="closeAlert"
+            />
       </div>
     </div>
   </div>
 </template>
-<style scoped>
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-/* Centered box */
-.custom-alert {
-  background: #f6ffed;
-  border: 1px solid #ee943b;
-  color: #d42222;
-  padding: 20px 30px;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.custom-alert p {
-  margin: 8px 0 16px;
-  font-size: 16px;
-}
-
-.close-btn {
-  background: #c41a1a;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.close-btn:hover {
-  background: #bc1414;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-</style>

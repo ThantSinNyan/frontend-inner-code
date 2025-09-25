@@ -90,14 +90,8 @@
                                 class="hs_slider_right_tabs_wrapper hs_slider_right_tabs_wrapper2"
                                 data-animation="animated bounceInLeft hs_slider_tab_fifth"
                               >
-                                <div class="hs_slider_tabs_icon_wrapper">
-                                  <i class="flaticon-coins" />
-                                </div>
-                                <div class="hs_slider_tabs_icon_cont_wrapper">
-                                  <ul>
-                                    <li><a href="#" class="hs_tabs_btn">Financial</a></li>
-                                  </ul>
-                                </div>
+                               
+                              
                               </div>
                             </div>
                           </div>

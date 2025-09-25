@@ -73,7 +73,7 @@ const onLogin = async () => {
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="login_form_wrapper">
-            <h2 class="mb-4 text-center">Login to Your Account</h2>
+           <h2 class="login-heading">Login to Your Account</h2>
             <br />
             <form class="login-form" @submit.prevent="onLogin">
               <div class="form-group mb-3">
@@ -174,4 +174,13 @@ const onLogin = async () => {
 .form-label {
   font-weight: 600;
 }
+.login-heading {
+  padding: 15px 0; /* top & bottom padding */
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
+  color: #75429c; /* brand purple */
+  letter-spacing: 1px;
+}
+
 </style>

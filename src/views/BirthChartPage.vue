@@ -45,6 +45,28 @@ const zodiacIcons: Record<string, string> = {
   pisces: '/images/content/icon12.png',
 }
 
+const zodiacIconMap: Record<string, string> = {
+  aries: "flaticon-aries-sign",
+  taurus: "flaticon-taurus-astrological-sign-symbol",
+  gemini: "flaticon-gemini-zodiac-sign-symbol",
+  cancer: "flaticon-cancer",
+  leo: "flaticon-leo",
+  virgo: "flaticon-virgo-astrological-symbol-sign",
+  libra: "flaticon-libra",
+  scorpio: "flaticon-scorpio",
+  sagittarius: "flaticon-sagittarius-sign",
+  capricorn: "flaticon-capricorn",
+  aquarius: "flaticon-aquarius-zodiac-sign-symbol",
+  pisces: "flaticon-pisces"
+}
+
+const zodiacClass = computed(() => {
+  const sign = personOverView.value?.sign?.toLowerCase() || ''
+  console.log("zodiacIconsSmall[sign] --> ",zodiacIconMap[sign] )
+  return zodiacIconMap[sign] || '' 
+})
+
+
 const zodiacIcon = computed(() => {
   const sign = personOverView.value.sign?.toLowerCase() || ''
   return zodiacIcons[sign] || '/images/content/default.png'
@@ -83,7 +105,10 @@ function closeAlert() {
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  full_width">
           <div class="hs_indx_title_right_wrapper">
             <ul>
-              <li><a href="#"> {{ t('journey.birthData') }}</a> &nbsp;&nbsp;&nbsp;> </li>
+              <li>
+                <router-link to="/showAllJourney">Show All Journey</router-link>
+                &nbsp;&nbsp;&nbsp;>
+              </li>
               <li> {{ t('journey.journeyOverview') }}</li>
             </ul>
           </div>
@@ -1064,7 +1089,7 @@ function closeAlert() {
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="hs_sign_left_tabs_wrapper hs_sign_left_tabs_border_wrapper1">
                   <div class="hs_slider_tabs_icon_wrapper">
-                    <i class="flaticon-aries-sign" />
+                    <i :class="zodiacClass" />
                   </div>
                   <div class="hs_slider_tabs_icon_cont_wrapper hs_ar_tabs_heading_wrapper">
                     <ul>
@@ -1261,3 +1286,11 @@ function closeAlert() {
     </div>
   </div>
 </template>
+<style scoped>
+/* .flaticon-capricorn {
+  background-color: green !important;
+  border-radius: 50%;  
+  padding: 10px;        
+  color: white;   
+} */
+</style>

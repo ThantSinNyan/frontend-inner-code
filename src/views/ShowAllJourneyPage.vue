@@ -36,7 +36,10 @@ function goToJourney(id) {
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 full_width">
           <div class="hs_indx_title_right_wrapper">
             <ul>
-                 <li><a href="#">Birth Chart</a> &nbsp;&nbsp;&nbsp;></li>
+                <li>
+                  <router-link to="/">Home</router-link>
+                  &nbsp;&nbsp;&nbsp;>
+                </li>
               <li>Your Journey</li>
             </ul>
           </div>

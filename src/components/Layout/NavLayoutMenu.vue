@@ -8,13 +8,14 @@ const { t } = useI18n()
     <div class="hs_top_header_main_Wrapper">
       <div class="hs_header_logo_left">
         <div class="hs_logo_wrapper">
-          <a href="index.html"
-            ><img
-              src="/images/header/inner_code_nav_logo.png"
-              class="img-responsive"
-              alt="logo"
-              title="Logo"
-          /></a>
+         <router-link to="/" class="logo-link">
+          <img
+            src="/images/header/inner_code_nav_logo.png"
+            class="img-responsive"
+            alt="logo"
+            title="Logo"
+          />
+        </router-link>
         </div>
       </div>
       <div class="hs_header_logo_right">

@@ -22,7 +22,12 @@
                     <div class="hs_effect_btn">
                       <ul>
                         <li data-animation="animated flipInX">
-                          <a href="#" class="hs_btn_hover">Read more</a>
+                         <router-link 
+                            to="/showAllJourney" 
+                            class="hs_btn_hover"
+                          >
+                           Start Journey
+                          </router-link>
                         </li>
                       </ul>
                     </div>

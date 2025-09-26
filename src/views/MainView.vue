@@ -4,7 +4,6 @@
     <div class="main_header_wrapper">
       <NavLayoutContact />
       <NavLayoutMenu />
-      <!-- ✅ Keep the ref on the CustomAlert component -->
       <CustomAlert ref="subscriptionAlert" />
     </div>
     <router-view />

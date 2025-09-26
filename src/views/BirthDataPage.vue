@@ -211,7 +211,7 @@ watch(
       </div>
     </div>
   </div>
-  <div class="hs_sign_main_wrapper" style="margin-bottom: 3rem">
+  <div class="hs_sign_main_wrapper">
     <!-- hs_slider_bottom_wrapper Start -->
     <div class="hs_slider_bottom_wrapper">
       <div class="container">
@@ -346,3 +346,10 @@ watch(
     </div>
   </div>
 </template>
+<style scoped>
+.hs_slider_bottom_wrapper {
+  margin-bottom: 10px; /* enough space for footer */
+  position: relative;
+  z-index: 2; /* keep it above footer if needed */
+}
+</style>

@@ -305,10 +305,10 @@ const imageMap: Record<string, string> = {
           <div class="hs_blog_right_sidebar_main_wrapper">
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="hs_blog_right_search_wrapper">
+                <!-- <div class="hs_blog_right_search_wrapper">
                   <input type="text" placeholder="Search" />
                   <button type="submit"><i class="fa fa-search" /></button>
-                </div>
+                </div> -->
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="hs_blog_right_cate_list_heading_wrapper hs_vs_list_wrapper">
@@ -374,6 +374,37 @@ const imageMap: Record<string, string> = {
   border: 2px solid #75429c;
   color: #75429c;
 }
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(1px);
+}
+
+.loading-spinner {
+  border: 6px solid rgba(117, 66, 156, 0.2);
+  border-top: 6px solid #75429c;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.hs_blog_right_cate_list_cont_wrapper li a.active-plan {
+  border: 2px solid #75429c;
+  color: #75429c;
+}
 .hs_blog_box1_img_wrapper {
   position: relative;
   display: inline-block;
@@ -396,7 +427,7 @@ const imageMap: Record<string, string> = {
   transform: translate(-50%, -50%);
   text-align: center;
   color: white !important;; 
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6); /* makes white text readable on bright images */
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6); 
 }
 
 .overlay-heading h2 {

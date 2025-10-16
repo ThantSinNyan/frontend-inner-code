@@ -32,7 +32,9 @@ const { t } = useI18n()
               <a class="menu-button" href="#">{{ t('menuBar.services') }}</a>
               <ul class="dropdown-menu hs_mega_menu">
                 <li>
-                  <a class="menu-button" href="aries.html">Healing Journey Plan</a>
+                  <RouterLink class="menu-button" :to="{ name: 'showAllJourney' }">
+                    Healing Journey Plan
+                  </RouterLink>
                 </li>
               </ul>
             </li>
@@ -44,7 +46,8 @@ const { t } = useI18n()
         <div class="hs_btn_wrapper hidden-md">
           <ul>
             <li>
-              <router-link class="hs_btn_hover" to="/showAllJourney">{{
+              <router-link class="hs_btn_hover" :to="{ name: 'showAllJourney' }">
+                {{
                 t('menuBar.btnStartJourney')
               }}</router-link>
             </li>

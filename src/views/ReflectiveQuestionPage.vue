@@ -34,7 +34,7 @@ async function submitAnswers() {
 }
 function closeAlert() {
   showSuccessAlert.value = false
-  router.push('/JourneyDetail/'+journeyPlanDay1)
+  router.push('/showAllJourney')
 }
 </script>
 <template>

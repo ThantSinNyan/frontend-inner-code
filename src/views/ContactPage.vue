@@ -28,9 +28,9 @@
               <h2>Get in <span>Touch</span></h2>
               <h4><span>&nbsp;</span></h4>
               <p>
-                Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis
-                bibendum<br />
-                auctor, nisi elit consequat hello Aenean world.
+                We’re always happy to connect with you.<br />
+                If you have questions about our programs, need guidance, or want to share feedback,
+                please reach out — we’ll get back to you as soon as possible.
               </p>
             </div>
           </div>
@@ -41,9 +41,11 @@
             <div class="inner_wrapper">
               <h4><a href="#">Address</a></h4>
               <p>
-                512 - omexcity, California
+                Room 504, 5th Floor, Yuzana Tower
                 <br />
-                California, omexcity
+                No. 28, Pyay Road, Kamayut Township
+                <br />
+                Yangon, Myanmar
               </p>
             </div>
           </div>
@@ -54,9 +56,9 @@
             <div class="inner_wrapper">
               <h4><a href="#">Phone</a></h4>
               <p>
-                +1-804-548-5214
+               Main: +66 2 821 5124
                 <br />
-                +1-804-548-5215
+               Support (LINE/WhatsApp): +66 98 456 3214
               </p>
             </div>
           </div>
@@ -67,9 +69,9 @@
             <div class="inner_wrapper">
               <h4><a href="#">Email</a></h4>
               <p>
-                hello@example.com
+                 service@innercode.app
                 <br />
-                support@example.com
+                 support@innercode.app
               </p>
             </div>
           </div>
@@ -86,9 +88,9 @@
               <h2>Fill Free To <span>Contact</span></h2>
               <h4><span>&nbsp;</span></h4>
               <p>
-                Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis
-                bibendum<br />
-                auctor, nisi elit consequat hello Aenean world.
+               We’d love to hear from you.<br />
+              Whether you have a question about your healing journey, need technical support, or simply want to <br/>
+              connect — our team is here to help.
               </p>
             </div>
           </div>

@@ -69,10 +69,10 @@ const goToRegister = () => {
           <div class="col-lg-6 col-md-5 col-sm-5 col-xs-5" />
           <div class="col-lg-6 col-md-7 col-sm-7 col-xs-7">
             <div class="hs_top_right_wrapper">
-              <div class="hs_navi_searchbar_wrapper hidden-sm hidden-xs">
+              <!-- <div class="hs_navi_searchbar_wrapper hidden-sm hidden-xs">
                 <input type="text" :placeholder="t('navBar.search')" />
                 <button><i class="fa fa-search" /></button>
-              </div>
+              </div> -->
               <ul class="cart_login_wrapper">
                 <li class="dropdown menu-button hs_top_user_profile">
                   <a href="#">

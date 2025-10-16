@@ -25,16 +25,7 @@ const { t } = useI18n()
               </h4>
               <ul>
                 <li>
-                  <a href="#"><i class="fa fa-facebook" /></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-twitter" /></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-youtube-play" /></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-linkedin" /></a>
+                  <a href="https://www.facebook.com/profile.php?id=61576578658604"><i class="fa fa-facebook" /></a>
                 </li>
               </ul>
             </div>
@@ -44,44 +35,34 @@ const { t } = useI18n()
               <h2>{{ t('footer.quickLinks') }}</h2>
               <ul class="hs_footer_list">
                 <li>
-                  <a href="#"
-                    ><i class="fa fa-caret-right" aria-hidden="true" /> {{ t('footer.home') }}</a
-                  >
+                  <RouterLink :to="{ name: 'Home' }">
+                    <i class="fa fa-caret-right" aria-hidden="true" />
+                    {{ t('footer.home') }}
+                  </RouterLink>
                 </li>
                 <li>
-                  <a href="#"
-                    ><i class="fa fa-caret-right" aria-hidden="true" /> {{ t('footer.about') }}
-                  </a>
+                  <RouterLink :to="{ name: 'About' }">
+                      <i class="fa fa-caret-right" aria-hidden="true" />
+                    {{ t('footer.about') }}
+                  </RouterLink>
                 </li>
                 <li>
-                  <a href="#"
-                    ><i class="fa fa-caret-right" aria-hidden="true" /> {{ t('footer.howItWorks') }}
-                  </a>
+                  <RouterLink :to="{ name: 'showAllJourney' }">
+                    <i class="fa fa-caret-right" aria-hidden="true" />
+                    {{ t('footer.startYourJourney') }}
+                  </RouterLink>
                 </li>
                 <li>
-                  <a href="#"
-                    ><i class="fa fa-caret-right" aria-hidden="true" />
-                    {{ t('footer.exploreSigns') }}</a
-                  >
+                 <RouterLink :to="{ name: 'About' }">
+                  <i class="fa fa-caret-right" aria-hidden="true" />
+                  {{ t('footer.aboutUs') }}
+                </RouterLink>
                 </li>
                 <li>
-                  <a href="#"
-                    ><i class="fa fa-caret-right" aria-hidden="true" />{{
-                      t('footer.startYourJourney')
-                    }}</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><i class="fa fa-caret-right" aria-hidden="true" />{{ t('footer.aboutUs') }}
-                  </a>
-                </li>
-                <li>
-                  <a href="#"
-                    ><i class="fa fa-caret-right" aria-hidden="true" />{{
-                      t('footer.contactUs')
-                    }}</a
-                  >
+                    <RouterLink :to="{ name: 'Contact' }">
+                    <i class="fa fa-caret-right" aria-hidden="true" />
+                    {{ t('footer.contactUs') }}
+                  </RouterLink>
                 </li>
               </ul>
             </div>

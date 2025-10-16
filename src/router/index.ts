@@ -15,47 +15,38 @@ import CreateUserAccountPage from '@/views/CreateUserAccountPage.vue'
 import LoginPage from '@/views/LoginPage.vue'
 import ShowAllJourneyPage from '@/views/ShowAllJourneyPage.vue'
 
+const scrollPositions = new Map()
+
 const routes = [
   { path: '/', name: 'Home', component: HomePage },
   { path: '/about', name: 'About', component: AboutPage },
   { path: '/contact', name: 'Contact', component: ContactPage },
-  {
-    path: '/birthChart/:id',
-    name: 'birthChart',
-    component: BirthChartPage,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/birthDataPage',
-    name: 'birthData',
-    component: BirthDataPage,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/reflectiveQuestion',
-    name: 'reflectiveQuestion',
-    component: ReflectiveQuestionPage,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/journeyDetail/:id',
-    name: 'journeyDetail',
-    component: JourneyDetailPage,
-    meta: { requiresAuth: true, requiresSubscription: true }, 
-  },
+
+  { path: '/birthChart/:id', name: 'birthChart', component: BirthChartPage, meta: { requiresAuth: true } },
+  { path: '/birthDataPage', name: 'birthData', component: BirthDataPage, meta: { requiresAuth: true } },
+  { path: '/reflectiveQuestion', name: 'reflectiveQuestion', component: ReflectiveQuestionPage, meta: { requiresAuth: true } },
+  { path: '/journeyDetail/:id', name: 'journeyDetail', component: JourneyDetailPage, meta: { requiresAuth: true, requiresSubscription: true } },
+
   { path: '/login', name: 'login', component: LoginPage },
   { path: '/register', name: 'register', component: CreateUserAccountPage },
-  {
-    path: '/showAllJourney',
-    name: 'showAllJourney',
-    component: ShowAllJourneyPage,
-    meta: { requiresAuth: true },
-  },
+
+  { path: '/showAllJourney', name: 'showAllJourney', component: ShowAllJourneyPage, meta: { requiresAuth: true } },
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(), 
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return { ...savedPosition, behavior: 'smooth' }
+    if (to.hash) {
+      return { el: to.hash, top: 80, behavior: 'smooth' }
+    }
+    const remembered = scrollPositions.get(to.fullPath)
+    if (remembered) {
+      return { left: remembered.left, top: remembered.top, behavior: 'smooth' }
+    }
+    return { left: 0, top: 0, behavior: 'smooth' }
+  },
 })
 
 router.beforeEach((to, from, next) => {
@@ -63,15 +54,24 @@ router.beforeEach((to, from, next) => {
   const personalInfoStore = usePersonalInfoStore()
   const uiStore = useUiStore()
 
-  if (!authStore.token && to.meta.requiresAuth) {
+  scrollPositions.set(from.fullPath, {
+    left: window.pageXOffset,
+    top: window.pageYOffset,
+  })
+
+  if (to.meta.requiresAuth && !authStore.token) {
     if (to.name !== 'login' && to.name !== 'register') {
       uiStore.openAlert({
         title: 'Unauthorized',
         message: 'You are not authorized. Please login again.',
         confirmLabel: 'Go to Login',
-        onConfirmCallback: () => router.push({ name: 'login' }),
+        onConfirmCallback: () => {
+          if (router.currentRoute.value.name !== 'login') {
+            router.push({ name: 'login' })
+          }
+        },
       })
-      return next({ name: 'login' }) 
+      return next({ name: 'login' })
     }
     return next()
   }
@@ -80,10 +80,14 @@ router.beforeEach((to, from, next) => {
     uiStore.openAlert({
       title: 'Access Required',
       message: 'Please complete the reflective questions first to unlock your healing plan.',
-      confirmLabel: 'Go to Home',
-      onConfirmCallback: () => router.push({ name: 'Home' }),
+      confirmLabel: 'Go to Reflective Questions',
+      onConfirmCallback: () => {
+        if (router.currentRoute.value.name !== 'reflectiveQuestion') {
+          router.push({ name: 'reflectiveQuestion' })
+        }
+      },
     })
-    return next({ name: 'showAllJourney' }) 
+    return next({ name: 'reflectiveQuestion' })
   }
 
   next()

@@ -35,21 +35,16 @@
             </div>
           </div>
           <div class="hs_about_right_cont_wrapper">
-            <h1>+1800-123-123</h1>
-            <h2>Horoscope Revels The Will Of God</h2>
+           <h1>+95 9 790 456 123</h1>
+           <h2>Discover Your Path to Inner Healing</h2>
             <p>
-              Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum
-              velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat
-              consequat auctor eu in elit. Class aptent taciti<br /><br />
-              sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat
-              justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue.
+              Inner Code is a mindful wellness platform that helps you understand yourself
+              through personalized astrology, reflection, and guided healing journeys.
+              <br /><br />
+              Our mission is to blend traditional wisdom with modern self-awareness,
+              empowering you to align your body, mind, and spirit. Whether you seek clarity,
+              peace, or personal growth — your journey begins here.
             </p>
-
-            <div class="hs_effect_btn hs_about_btn">
-              <ul>
-                <li><a href="#" class="hs_btn_hover">Read more</a></li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
